@@ -89,7 +89,7 @@ img {
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    z-index: 1050; /* Ensuring sidebar stays below hamburger but above normal content */
+    z-index: 1000; /* Standard z-index for sidebar */
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15); 
     transition: background-color 0.4s ease, border-color 0.4s ease;
 }
@@ -184,7 +184,7 @@ img {
 .settings-backdrop {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: 90;
+    z-index: 1050; /* Above sidebar, below dropdown */
     display: none;
     cursor: default;
 }
@@ -208,7 +208,7 @@ img {
     visibility: hidden;
     transform: translateY(10px);
     transition: all 0.3s ease;
-    z-index: 100;
+    z-index: 2000; /* Very high z-index so it's above everything including profile */
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
@@ -247,6 +247,7 @@ img {
     border-top: 1px solid var(--border-color);
     cursor: pointer; /* Change cursor to pointer */
     transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 100; /* Low z-index so it doesn't cover menus */
 }
 
 /* Subtle hover effect for button mode */
@@ -737,7 +738,7 @@ img {
         width: 100%;
     }
 
-    /* Baguette menu button */
+    /* Baguette menu button (Absolute highest Z-index) */
     .hamburger-btn {
         display: flex;
         flex-direction: column;
@@ -750,7 +751,7 @@ img {
         position: fixed; 
         top: 1.5rem; 
         left: 1.5rem;
-        z-index: 1100; /* Higher than profile button to prevent blocking */
+        z-index: 9999; /* BULLETPROOF Z-INDEX */
         cursor: pointer;
         border-radius: 8px; 
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
@@ -780,7 +781,7 @@ img {
         width: min(320px, 75vw);
         height: 100vh;
         transition: transform 0.3s ease;
-        z-index: 1050; /* Needs to be below hamburger but above layout */
+        z-index: 1000; /* Sidebar base layer */
         box-shadow: 5px 0 25px rgba(0,0,0,0.5); 
     }
 
@@ -803,7 +804,7 @@ img {
         position: fixed;
         bottom: 2vh;
         left: 3vw;
-        z-index: 1000; /* Lower than hamburger button */
+        z-index: 100; /* LOW Z-INDEX to never overlap menu or hamburger */
         background-color: var(--bg-surface);
         padding: 6px 12px 6px 6px;
         border-radius: 40px;
@@ -824,13 +825,14 @@ img {
 
     .user-info { display: none; } 
     
+    /* 2 lines layout with tighter line-height */
     .mobile-user-status {
         display: block; 
         font-size: 0.85rem;
         color: var(--text-main);
         font-weight: 500;
         margin-left: 0.5rem;
-        line-height: 1.1; /* Tighter line height for two lines */
+        line-height: 1.1; 
         text-align: left;
     }
 
