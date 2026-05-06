@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents Command Center</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- CSS Checkbox Hack for Mobile Menu -->
+    <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
+    <label for="mobile-menu-toggle" class="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+
+    <div class="dashboard-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">A</div>
+                <h2>AI AGENTS</h2>
+            </div>
+            
+            <!-- Search bar specifically for Mobile Menu (Hidden on Desktop) -->
+            <div class="search-bar sidebar-search">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search Agents...">
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home" class="active"><span class="icon">🏠</span> Home</a></li>
+                    <li><a href="#agents-logs"><span class="icon">🤖</span> Agents</a></li>
+                    <li><a href="#executions-stats"><span class="icon">⚡</span> Executions</a></li>
+                    <li><a href="#create-agent"><span class="icon">➕</span> Create Agent</a></li>
+                    <li><a href="#home"><span class="icon">📊</span> Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="bottom-nav">
+                <a class="settings-btn"><span class="icon">⚙️</span> Settings</a>
+                <div class="user-profile">
+                    <div class="avatar-wrapper">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="avatar">
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <!-- Desktop Info -->
+                    <div class="user-info">
+                        <span class="user-name">Hili Schlesinger</span>
+                        <span class="user-role">SysAdmin</span>
+                    </div>
+                    <!-- Mobile Info -->
+                    <span class="mobile-user-status">Hili-conect</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Page Header (Sticky) -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h2>Command Center</h2>
+                    <p>Manage, monitor and deploy your AI agents</p>
+                </div>
+                <!-- Main Search Bar (Hidden on Mobile) -->
+                <div class="search-bar main-search">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search Agents...">
+                </div>
+            </header>
+
+            <!-- Bento Box Grid -->
+            <div class="bento-grid" id="home">
+                
+                <!-- Card 1: Active Agents -->
+                <div class="bento-card stats-card" id="executions-stats">
+                    <div class="card-header">
+                        <h3>Active Agents</h3>
+                        <span class="live-status"></span>
+                    </div>
+                    <div class="stat-value">34</div>
+                    <div class="trend-line positive">↗ +15% this week</div>
+                </div>
+
+                <!-- Card 2: Total Executions -->
+                <div class="bento-card stats-card">
+                    <div class="card-header">
+                        <h3>Total Executions</h3>
+                    </div>
+                    <div class="stat-value">12.5k</div>
+                    <div class="css-loader-wrapper">
+                        <span class="css-spinner"></span> Processing
+                    </div>
+                </div>
+
+                <!-- Card 3: Token Usage -->
+                <div class="bento-card stats-card">
+                    <div class="card-header">
+                        <h3>Token Usage</h3>
+                    </div>
+                    <div class="stat-value">4.2M</div>
+                    <div class="trend-line warning">≈ 150k / day</div>
+                </div>
+
+                <!-- Card 4: System Health -->
+                <div class="bento-card stats-card">
+                    <div class="card-header">
+                        <h3>System Health</h3>
+                    </div>
+                    <div class="stat-value">98%</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 98%;"></div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Form (Create New Agent) -->
+                <div class="bento-card form-card" id="create-agent">
+                    <h3>Create New Agent</h3>
+                    <form action="https://formspree.io/f/xpqblzro" method="POST" class="agent-form">
+                        
+                        <div class="form-group">
+                            <label for="agentName">Agent Name</label>
+                            <input type="text" id="agentName" name="agentName" required placeholder="e.g. DataScraper_01" minlength="3">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adminEmail">Admin Email</label>
+                            <input type="email" id="adminEmail" name="adminEmail" required placeholder="admin@domain.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modelSelect">Select Model</label>
+                            <select id="modelSelect" name="model" required>
+                                <option value="" disabled selected>Choose a model...</option>
+                                <option value="gpt4">GPT-4o</option>
+                                <option value="claude3">Claude 3 Opus</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>Capabilities</label>
+                            <div class="checkbox-options">
+                                <label><input type="checkbox" name="capabilities" value="vision"> Vision</label>
+                                <label><input type="checkbox" name="capabilities" value="planning"> Planning</label>
+                            </div>
+                        </div>
+
+                        <!-- CSS Checkbox Hack for Toggle Switch -->
+                        <div class="form-group toggle-group">
+                            <span class="toggle-label-text">Status (Active)</span>
+                            <div class="toggle-switch-container">
+                                <input type="checkbox" id="statusToggle" name="status" class="toggle-checkbox" checked>
+                                <label for="statusToggle" class="toggle-switch-label"></label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Deploy Agent</button>
+                    </form>
+                </div>
+
+                <!-- Card 6: Agent Logs Table -->
+                <div class="bento-card table-card" id="agents-logs">
+                    <h3>Agent Logs</h3>
+                    <div class="table-wrapper custom-scrollbar">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Agent</th>
+                                    <th>Tasks</th>
+                                    <th>Status</th>
+                                    <th>Duration</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 25 AI Agents -->
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=11" alt="Agent"><span>Claude 3 Opus</span></div></td><td>Data analysis and processing</td><td><span class="badge badge-running">Running</span></td><td>20m 30s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=12" alt="Agent"><span>SysAdmin Bot</span></div></td><td>Routine system check</td><td><span class="badge badge-complete">Complete</span></td><td>2m 15s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=13" alt="Agent"><span>Data Miner</span></div></td><td>Scraping external sources</td><td><span class="badge badge-failed">Failed</span></td><td>1m 12s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=14" alt="Agent"><span>Code Reviewer</span></div></td><td>Analyzing pull requests</td><td><span class="badge badge-running">Running</span></td><td>45m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=15" alt="Agent"><span>SEO Optimizer</span></div></td><td>Keyword gap analysis</td><td><span class="badge badge-complete">Complete</span></td><td>15m 00s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=33" alt="Agent"><span>Security Scanner</span></div></td><td>Vulnerability assessment</td><td><span class="badge badge-running">Running</span></td><td>1h 20m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=51" alt="Agent"><span>DB Optimizer</span></div></td><td>Index rebuilding</td><td><span class="badge badge-complete">Complete</span></td><td>8m 45s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=53" alt="Agent"><span>API Monitor</span></div></td><td>Latency checking</td><td><span class="badge badge-failed">Failed</span></td><td>0m 30s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=59" alt="Agent"><span>Content Gen</span></div></td><td>Drafting blog posts</td><td><span class="badge badge-running">Running</span></td><td>12m 05s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=60" alt="Agent"><span>Network Analyzer</span></div></td><td>Traffic routing optimization</td><td><span class="badge badge-complete">Complete</span></td><td>34m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=61" alt="Agent"><span>Task Master</span></div></td><td>Managing sub-tasks</td><td><span class="badge badge-running">Running</span></td><td>10m 05s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=62" alt="Agent"><span>Build Bot</span></div></td><td>Compiling latest build</td><td><span class="badge badge-complete">Complete</span></td><td>5m 20s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=63" alt="Agent"><span>QA Tester</span></div></td><td>Running unit tests</td><td><span class="badge badge-failed">Failed</span></td><td>2m 50s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=64" alt="Agent"><span>Log Aggregator</span></div></td><td>Collecting server logs</td><td><span class="badge badge-running">Running</span></td><td>30m 15s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=65" alt="Agent"><span>Metric Scraper</span></div></td><td>Fetching KPI metrics</td><td><span class="badge badge-complete">Complete</span></td><td>12m 40s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=66" alt="Agent"><span>Backup Manager</span></div></td><td>Syncing cloud storage</td><td><span class="badge badge-running">Running</span></td><td>1h 45m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=67" alt="Agent"><span>Image Processor</span></div></td><td>Compressing media files</td><td><span class="badge badge-complete">Complete</span></td><td>4m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=68" alt="Agent"><span>Email Parser</span></div></td><td>Sorting inbox tickets</td><td><span class="badge badge-running">Running</span></td><td>8m 30s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=69" alt="Agent"><span>Video Encoder</span></div></td><td>Rendering assets</td><td><span class="badge badge-running">Running</span></td><td>2h 10m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=70" alt="Agent"><span>Text Summarizer</span></div></td><td>Generating reports</td><td><span class="badge badge-complete">Complete</span></td><td>1m 20s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=71" alt="Agent"><span>Auth Guardian</span></div></td><td>Checking user logins</td><td><span class="badge badge-running">Running</span></td><td>15h 00m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=72" alt="Agent"><span>Cache Clearer</span></div></td><td>Purging stale data</td><td><span class="badge badge-complete">Complete</span></td><td>0m 45s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=73" alt="Agent"><span>Support AI</span></div></td><td>Answering tickets</td><td><span class="badge badge-failed">Failed</span></td><td>5m 12s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=74" alt="Agent"><span>Social Poster</span></div></td><td>Publishing updates</td><td><span class="badge badge-complete">Complete</span></td><td>1m 00s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr><td><div class="agent-cell"><img src="https://i.pravatar.cc/150?img=75" alt="Agent"><span>Data Cleanser</span></div></td><td>Removing duplicates</td><td><span class="badge badge-running">Running</span></td><td>40m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Card 7: Recent Activity -->
+                <div class="bento-card activity-card">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list custom-scrollbar">
+                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Code Reviewer</strong> started job</p><span class="activity-time">Just now</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SEO Optimizer</strong> completed report</p><span class="activity-time">2 mins ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>API Monitor</strong> connection failed</p><span class="activity-time">5 mins ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Data Miner</strong> started job</p><span class="activity-time">12 mins ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>DB Optimizer</strong> reindexed tables</p><span class="activity-time">18 mins ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Security Scanner</strong> high latency</p><span class="activity-time">24 mins ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> analyzed data</p><span class="activity-time">30 mins ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">➕</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> deployed new agent</p><span class="activity-time">45 mins ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Network Analyzer</strong> started job</p><span class="activity-time">1 hour ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SysAdmin Bot</strong> routine check passed</p><span class="activity-time">1 hour ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>Content Gen</strong> API quota exceeded</p><span class="activity-time">2 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> started job</p><span class="activity-time">2 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Data Miner</strong> scraped 500 pages</p><span class="activity-time">3 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Code Reviewer</strong> found 3 conflicts</p><span class="activity-time">3.5 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>DB Optimizer</strong> cleared cache</p><span class="activity-time">4 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Security Scanner</strong> started deep scan</p><span class="activity-time">4 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">⚙️</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> updated agent settings</p><span class="activity-time">5 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Network Analyzer</strong> optimized routes</p><span class="activity-time">5.5 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>Data Miner</strong> blocked by firewall</p><span class="activity-time">6 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Content Gen</strong> drafted 3 articles</p><span class="activity-time">8 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>API Monitor</strong> started job</p><span class="activity-time">12 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> generated summary</p><span class="activity-time">14 hours ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>DB Optimizer</strong> storage reaching 90%</p><span class="activity-time">1 day ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SysAdmin Bot</strong> backed up database</p><span class="activity-time">1 day ago</span></div></div>
+                        <div class="activity-item"><span class="activity-icon info">➕</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> created API Monitor</p><span class="activity-time">2 days ago</span></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
