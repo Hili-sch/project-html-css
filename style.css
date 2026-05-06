@@ -2,18 +2,38 @@
    1. Configuration & Fundamentals (Reset & Variables)
    ========================================================================== */
 :root {
+    /* משתני צבע ברירת מחדל (מצב כהה) */
     --bg-dark: #13141c;
     --bg-surface: #1e1f2e;
     --bg-surface-hover: #2a2b3d;
     --text-main: #e2e8f0;
     --text-muted: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --header-bg: rgba(19, 20, 28, 0.95);
+    --zebra-bg: rgba(255, 255, 255, 0.02);
+    
+    /* צבעי ניאון ומבטאים - עובדים מעולה גם בכהה וגם בבהיר */
     --accent-primary: #8b5cf6; 
     --accent-secondary: #3b82f6; 
     --success: #10b981; 
     --danger: #ef4444; 
     --warning: #f59e0b; 
-    --border-color: rgba(255, 255, 255, 0.08);
+    
     --font-main: 'Inter', sans-serif;
+}
+
+/* ==========================================================================
+   * LIGHT MODE OVERRIDE (הקסם של המצב הבהיר בעזרת :has) *
+   ========================================================================== */
+body:has(#theme-light:checked) {
+    --bg-dark: #f1f5f9;
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --header-bg: rgba(241, 245, 249, 0.95);
+    --zebra-bg: rgba(0, 0, 0, 0.03);
 }
 
 html {
@@ -33,6 +53,7 @@ body {
     font-size: 16px; 
     line-height: 1.5;
     overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease; /* מעבר רך בשינוי מצב כהה/בהיר */
 }
 
 a {
@@ -58,7 +79,7 @@ img {
     width: 100%;
 }
 
-/* Sidebar - Sticky Positioning for Desktop */
+/* Sidebar */
 .sidebar {
     position: sticky;
     top: 0;
@@ -70,6 +91,7 @@ img {
     padding: 1.5rem;
     z-index: 60; 
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15); 
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .logo {
@@ -89,6 +111,7 @@ img {
     border-radius: 8px;
     font-weight: bold;
     font-size: 1.2rem;
+    color: white; /* תמיד לבן בתוך הבוקס הצבעוני */
 }
 
 /* שורת חיפוש צדדית - מוסתרת בדסקטופ בוודאות! */
@@ -116,7 +139,7 @@ img {
     transition: all 0.3s ease;
 }
 
-/* אפקט Hover על כפתורי הניווט */
+/* אפקט Hover על כפתורי הניווט (כולל Home) */
 .main-nav a:hover {
     background-color: rgba(139, 92, 246, 0.1);
     color: var(--accent-primary);
@@ -130,6 +153,14 @@ img {
     gap: 1rem;
 }
 
+/* ==========================================================================
+   SETTINGS DROPDOWN MENU (No JS Checkbox Hack)
+   ========================================================================== */
+.settings-container {
+    position: relative;
+    width: 100%;
+}
+
 /* כפתור הגדרות מקבל את אותו עיצוב כמו שאר כפתורי הניווט */
 .settings-btn {
     display: flex;
@@ -140,12 +171,71 @@ img {
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .settings-btn:hover { 
     background-color: rgba(139, 92, 246, 0.1);
     color: var(--accent-primary);
     transform: translateX(5px);
+}
+
+/* שכבת רקע לסגירת התפריט בלחיצה בחוץ */
+.settings-backdrop {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 90;
+    display: none;
+    cursor: default;
+}
+
+.settings-toggle-chk:checked ~ .settings-backdrop {
+    display: block;
+}
+
+/* התפריט עצמו */
+.settings-dropdown {
+    position: absolute;
+    bottom: 110%; /* עולה למעלה מעל הכפתור */
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.settings-toggle-chk:checked ~ .settings-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* פריטים בתוך תפריט ההגדרות */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: var(--accent-primary);
 }
 
 /* פרופיל המשתמש מתפקד ככפתור יצירת קשר */
@@ -155,12 +245,12 @@ img {
     gap: 1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
-    cursor: pointer; /* הפיכת הסמן ליד מצביעה */
+    cursor: pointer; 
     transition: opacity 0.3s ease;
 }
 
 .user-profile:hover {
-    opacity: 0.8; /* אפקט ריחוף עדין למצב כפתור */
+    opacity: 0.8; 
 }
 
 .avatar-wrapper { position: relative; }
@@ -192,7 +282,6 @@ img {
 .user-info { display: flex; flex-direction: column; }
 .user-role { font-size: 0.8rem; color: var(--text-muted); }
 
-/* טקסט למובייל - מוסתר בדסקטופ */
 .mobile-user-status { display: none; }
 
 /* Main Content Area */
@@ -212,12 +301,13 @@ img {
     position: sticky;
     top: 0;
     z-index: 50;
-    background-color: rgba(19, 20, 28, 0.95); 
+    background-color: var(--header-bg); 
     backdrop-filter: blur(10px); 
     margin: -2rem -2rem 0 -2rem; 
     padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--border-color);
     width: calc(100% + 4rem);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .header-title h2 {
@@ -231,7 +321,6 @@ img {
     font-size: 0.95rem;
 }
 
-/* שורת חיפוש בהאדר הראשי */
 .main-search { display: flex; }
 
 .search-bar {
@@ -242,7 +331,8 @@ img {
     width: 100%;
     max-width: 300px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .search-bar input {
@@ -269,11 +359,11 @@ img {
     border-radius: 16px;
     padding: 1.5rem;
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-width: 0; /* קריטי למניעת שבירת הגריד */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
+    min-width: 0; 
 }
 
 .bento-card h3 {
@@ -284,7 +374,7 @@ img {
 
 .bento-card:hover {
     transform: translateY(-4px); 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Explicit Grid Mapping for Desktop - סידור 2 על 2 לנתונים */
@@ -304,7 +394,7 @@ img {
 .progress-bar-container {
     width: 100%;
     height: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--border-color);
     border-radius: 4px;
     margin-top: 1rem;
     overflow: hidden;
@@ -356,10 +446,11 @@ img {
     background-color: var(--bg-surface);
     z-index: 10;
     box-shadow: 0 1px 0 var(--border-color);
+    transition: background-color 0.4s ease;
 }
 
 .data-table thead tr th { border-bottom: none; }
-.data-table tbody tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.02); }
+.data-table tbody tr:nth-child(even) { background-color: var(--zebra-bg); }
 .data-table tbody tr:hover { background-color: rgba(139, 92, 246, 0.05); }
 
 .agent-cell {
@@ -388,7 +479,7 @@ img {
 
 /* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar { height: 8px; width: 8px; }
-.custom-scrollbar::-webkit-scrollbar-track { background: var(--bg-dark); border-radius: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; border-radius: 4px; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
@@ -412,7 +503,7 @@ img {
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     background-color: var(--text-main);
-    color: var(--bg-dark);
+    color: var(--bg-surface);
     padding: 0.4rem 0.75rem;
     border-radius: 6px;
     font-size: 0.75rem;
@@ -476,7 +567,7 @@ img {
     border-radius: 8px;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background-color 0.4s ease;
     width: 100%;
 }
 
@@ -659,7 +750,7 @@ img {
         z-index: 1000;
         cursor: pointer;
         border-radius: 8px; 
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
         border: 1px solid var(--border-color);
         box-sizing: border-box;
     }
@@ -678,20 +769,20 @@ img {
     .mobile-menu-toggle:checked ~ .hamburger-btn span:nth-child(2) { opacity: 0; }
     .mobile-menu-toggle:checked ~ .hamburger-btn span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-    /* תפריט צד */
+    /* תפריט צד (מוגבל ל-75vw או 320px) */
     .sidebar {
         position: fixed;
         top: 0;
-        left: -320px; 
-        width: 300px;
+        left: calc(-1 * min(320px, 75vw)); 
+        width: min(320px, 75vw);
         height: 100vh;
         transition: transform 0.3s ease;
         z-index: 999;
-        box-shadow: 5px 0 25px rgba(0,0,0,0.5); 
+        box-shadow: 5px 0 25px rgba(0,0,0,0.3); 
     }
 
     .mobile-menu-toggle:checked ~ .dashboard-layout .sidebar {
-        transform: translateX(320px);
+        transform: translateX(min(320px, 75vw));
     }
 
     /* החלפת מצבי חיפוש */
@@ -714,24 +805,24 @@ img {
         padding: 6px 12px 6px 6px;
         border-radius: 40px;
         border: 1px solid var(--border-color);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         margin: 0;
         flex-direction: row;
-        border-top: none; /* ביטול הקו שהיה בדסקטופ */
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-top: none; 
+        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
         cursor: pointer;
     }
 
     .user-profile:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-        opacity: 1; /* דריסת השקיפות של הדסקטופ */
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        opacity: 1; 
     }
 
-    .user-info { display: none; } /* מסתיר את השם המלא מהדסקטופ */
+    .user-info { display: none; } 
     
     .mobile-user-status {
-        display: block; /* מציג את הטקסט המקוצר במובייל/טאבלט */
+        display: block; 
         font-size: 0.85rem;
         color: var(--text-main);
         font-weight: 500;
