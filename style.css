@@ -2,7 +2,7 @@
    1. Configuration & Fundamentals (Reset & Variables)
    ========================================================================== */
 :root {
-    /* משתני צבע ברירת מחדל (מצב כהה) */
+    /* Default color variables (Dark Mode) */
     --bg-dark: #13141c;
     --bg-surface: #1e1f2e;
     --bg-surface-hover: #2a2b3d;
@@ -12,7 +12,7 @@
     --header-bg: rgba(19, 20, 28, 0.95);
     --zebra-bg: rgba(255, 255, 255, 0.02);
     
-    /* צבעי ניאון ומבטאים - עובדים מעולה גם בכהה וגם בבהיר */
+    /* Neon and accent colors - work great in both dark and light modes */
     --accent-primary: #8b5cf6; 
     --accent-secondary: #3b82f6; 
     --success: #10b981; 
@@ -23,7 +23,7 @@
 }
 
 /* ==========================================================================
-   * LIGHT MODE OVERRIDE (הקסם של המצב הבהיר בעזרת :has) *
+   * LIGHT MODE OVERRIDE (The magic of Light Mode using :has) *
    ========================================================================== */
 body:has(#theme-light:checked) {
     --bg-dark: #f1f5f9;
@@ -53,7 +53,7 @@ body {
     font-size: 16px; 
     line-height: 1.5;
     overflow-x: hidden;
-    transition: background-color 0.4s ease, color 0.4s ease; /* מעבר רך בשינוי מצב כהה/בהיר */
+    transition: background-color 0.4s ease, color 0.4s ease; /* Smooth transition when changing dark/light mode */
 }
 
 a {
@@ -79,17 +79,17 @@ img {
     width: 100%;
 }
 
-/* Sidebar */
+/* Sidebar - Sticky Positioning for Desktop */
 .sidebar {
     position: sticky;
     top: 0;
-    height: 100vh; 
+    height: 100vh; /* Fill the screen height exactly */
     background-color: var(--bg-surface);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    z-index: 60; 
+    z-index: 1050; /* Ensuring sidebar stays below hamburger but above normal content */
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15); 
     transition: background-color 0.4s ease, border-color 0.4s ease;
 }
@@ -111,10 +111,10 @@ img {
     border-radius: 8px;
     font-weight: bold;
     font-size: 1.2rem;
-    color: white; /* תמיד לבן בתוך הבוקס הצבעוני */
+    color: white; /* Always white inside the colored box */
 }
 
-/* שורת חיפוש צדדית - מוסתרת בדסקטופ בוודאות! */
+/* Sidebar search - definitely hidden on desktop! */
 .sidebar-search {
     display: none;
     margin-bottom: 1.5rem;
@@ -139,7 +139,7 @@ img {
     transition: all 0.3s ease;
 }
 
-/* אפקט Hover על כפתורי הניווט (כולל Home) */
+/* Hover effect on navigation buttons (including Home) */
 .main-nav a:hover {
     background-color: rgba(139, 92, 246, 0.1);
     color: var(--accent-primary);
@@ -161,7 +161,7 @@ img {
     width: 100%;
 }
 
-/* כפתור הגדרות מקבל את אותו עיצוב כמו שאר כפתורי הניווט */
+/* Settings button gets the same design as other navigation buttons */
 .settings-btn {
     display: flex;
     align-items: center;
@@ -180,7 +180,7 @@ img {
     transform: translateX(5px);
 }
 
-/* שכבת רקע לסגירת התפריט בלחיצה בחוץ */
+/* Backdrop layer to close the menu when clicking outside */
 .settings-backdrop {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
@@ -193,10 +193,10 @@ img {
     display: block;
 }
 
-/* התפריט עצמו */
+/* Settings Menu */
 .settings-dropdown {
     position: absolute;
-    bottom: 110%; /* עולה למעלה מעל הכפתור */
+    bottom: 110%; /* Rises above the button */
     left: 0;
     width: 100%;
     background-color: var(--bg-surface);
@@ -220,7 +220,7 @@ img {
     transform: translateY(0);
 }
 
-/* פריטים בתוך תפריט ההגדרות */
+/* Items inside the settings menu */
 .dropdown-item {
     display: flex;
     align-items: center;
@@ -238,17 +238,18 @@ img {
     color: var(--accent-primary);
 }
 
-/* פרופיל המשתמש מתפקד ככפתור יצירת קשר */
+/* User profile acts as a contact button */
 .user-profile {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
-    cursor: pointer; 
-    transition: opacity 0.3s ease;
+    cursor: pointer; /* Change cursor to pointer */
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Subtle hover effect for button mode */
 .user-profile:hover {
     opacity: 0.8; 
 }
@@ -282,6 +283,7 @@ img {
 .user-info { display: flex; flex-direction: column; }
 .user-role { font-size: 0.8rem; color: var(--text-muted); }
 
+/* Mobile text - hidden on desktop */
 .mobile-user-status { display: none; }
 
 /* Main Content Area */
@@ -321,6 +323,7 @@ img {
     font-size: 0.95rem;
 }
 
+/* Search bar in main header */
 .main-search { display: flex; }
 
 .search-bar {
@@ -363,7 +366,7 @@ img {
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
-    min-width: 0; 
+    min-width: 0; /* Critical to prevent grid breaking */
 }
 
 .bento-card h3 {
@@ -377,16 +380,16 @@ img {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Explicit Grid Mapping for Desktop - סידור 2 על 2 לנתונים */
+/* Explicit Grid Mapping for Desktop - 2x2 layout for stats */
 .bento-grid > .stats-card:nth-of-type(1) { grid-column: 1 / 5; grid-row: 1; }
 .bento-grid > .stats-card:nth-of-type(2) { grid-column: 5 / 9; grid-row: 1; }
 .bento-grid > .stats-card:nth-of-type(3) { grid-column: 1 / 5; grid-row: 2; }
 .bento-grid > .stats-card:nth-of-type(4) { grid-column: 5 / 9; grid-row: 2; }
 
-/* טופס ההרשמה נושק להאדר ומקביל לשורות הסטטיסטיקה */
+/* Registration form touches the header and aligns with stats rows */
 .bento-grid > .form-card { grid-column: 9 / 13; grid-row: 1 / 3; } 
 
-/* הטבלה ואזור הפעילות מאוזנים יחד בשורה התחתונה */
+/* Table and activity area are balanced together on the bottom row */
 .bento-grid > .table-card { grid-column: 1 / 9; grid-row: 3; }
 .bento-grid > .activity-card { grid-column: 9 / 13; grid-row: 3; }
 
@@ -734,7 +737,7 @@ img {
         width: 100%;
     }
 
-    /* כפתור תפריט באגט */
+    /* Baguette menu button */
     .hamburger-btn {
         display: flex;
         flex-direction: column;
@@ -747,10 +750,10 @@ img {
         position: fixed; 
         top: 1.5rem; 
         left: 1.5rem;
-        z-index: 1000;
+        z-index: 1100; /* Higher than profile button to prevent blocking */
         cursor: pointer;
         border-radius: 8px; 
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
         border: 1px solid var(--border-color);
         box-sizing: border-box;
     }
@@ -769,7 +772,7 @@ img {
     .mobile-menu-toggle:checked ~ .hamburger-btn span:nth-child(2) { opacity: 0; }
     .mobile-menu-toggle:checked ~ .hamburger-btn span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-    /* תפריט צד (מוגבל ל-75vw או 320px) */
+    /* Sidebar */
     .sidebar {
         position: fixed;
         top: 0;
@@ -777,15 +780,15 @@ img {
         width: min(320px, 75vw);
         height: 100vh;
         transition: transform 0.3s ease;
-        z-index: 999;
-        box-shadow: 5px 0 25px rgba(0,0,0,0.3); 
+        z-index: 1050; /* Needs to be below hamburger but above layout */
+        box-shadow: 5px 0 25px rgba(0,0,0,0.5); 
     }
 
     .mobile-menu-toggle:checked ~ .dashboard-layout .sidebar {
         transform: translateX(min(320px, 75vw));
     }
 
-    /* החלפת מצבי חיפוש */
+    /* Toggle search modes */
     .sidebar-search { display: flex; }
     .main-search { display: none; }
 
@@ -795,17 +798,17 @@ img {
     }
     .main-nav ul { gap: 1rem; }
 
-    /* כפתור הפרופיל כווידג'ט צף למטה משמאל (רק טאבלט/מובייל) */
+    /* Profile button as a floating widget bottom left (tablet/mobile only) */
     .user-profile {
         position: fixed;
         bottom: 2vh;
         left: 3vw;
-        z-index: 1000;
+        z-index: 1000; /* Lower than hamburger button */
         background-color: var(--bg-surface);
         padding: 6px 12px 6px 6px;
         border-radius: 40px;
         border: 1px solid var(--border-color);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         margin: 0;
         flex-direction: row;
         border-top: none; 
@@ -815,7 +818,7 @@ img {
 
     .user-profile:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         opacity: 1; 
     }
 
@@ -827,12 +830,14 @@ img {
         color: var(--text-main);
         font-weight: 500;
         margin-left: 0.5rem;
+        line-height: 1.1; /* Tighter line height for two lines */
+        text-align: left;
     }
 
     .avatar { width: 32px; height: 32px; }
     .notification-badge { width: 14px; height: 14px; font-size: 0.6rem; top: -2px; right: -2px; }
 
-    /* התאמת ההאדר */
+    /* Adjust header to make room for hamburger */
     .top-header {
         padding-left: 5rem; 
         width: 100%;
@@ -843,7 +848,7 @@ img {
         padding: 1.5rem;
     }
 
-    /* גריד טאבלט */
+    /* Tablet grid organization - 2 columns */
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
@@ -901,7 +906,7 @@ img {
         left: 1rem;
     }
 
-    /* התאמת מיקום הפרופיל הצף במובייל */
+    /* Adjust floating profile position in mobile */
     .user-profile {
         bottom: 1.5rem;
         left: 1rem;
