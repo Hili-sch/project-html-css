@@ -38,6 +38,7 @@ body:has(#theme-light:checked) {
 
 html {
     scroll-behavior: smooth; 
+    scroll-padding-top: 110px; /* Fixes internal links scrolling behind sticky header */
 }
 
 *, *::before, *::after {
@@ -89,7 +90,7 @@ img {
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    z-index: 1000; /* Standard z-index for sidebar */
+    z-index: 1050; /* Ensuring sidebar stays below hamburger but above normal content */
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15); 
     transition: background-color 0.4s ease, border-color 0.4s ease;
 }
@@ -159,6 +160,7 @@ img {
 .settings-container {
     position: relative;
     width: 100%;
+    z-index: 2000; /* Forces the entire settings container above the user profile */
 }
 
 /* Settings button gets the same design as other navigation buttons */
@@ -208,7 +210,7 @@ img {
     visibility: hidden;
     transform: translateY(10px);
     transition: all 0.3s ease;
-    z-index: 2000; /* Very high z-index so it's above everything including profile */
+    z-index: 2000; 
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
@@ -246,8 +248,8 @@ img {
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
     cursor: pointer; /* Change cursor to pointer */
-    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 100; /* Low z-index so it doesn't cover menus */
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, visibility 0.3s ease;
+    z-index: 100; /* Keep lower than settings dropdown */
 }
 
 /* Subtle hover effect for button mode */
@@ -286,6 +288,14 @@ img {
 
 /* Mobile text - hidden on desktop */
 .mobile-user-status { display: none; }
+
+/* Hide user profile completely when mobile menu is active */
+.mobile-menu-toggle:checked ~ .dashboard-layout .user-profile {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(0.9);
+}
 
 /* Main Content Area */
 .main-content {
@@ -616,7 +626,16 @@ img {
 .toggle-checkbox:checked + .toggle-switch-label { background-color: var(--accent-primary); }
 .toggle-checkbox:checked + .toggle-switch-label::after { transform: translateX(22px); }
 
+/* Form Actions Container (Submit 80%, Reset 20%) */
+.form-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
 .btn-submit {
+    flex: 4; /* Takes ~80% of the space */
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     color: white;
     border: none;
@@ -624,12 +643,29 @@ img {
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 1rem;
     transition: filter 0.3s ease;
-    width: 100%;
 }
 
 .btn-submit:hover { filter: brightness(1.2); }
+
+.btn-reset {
+    flex: 1; /* Takes ~20% of the space */
+    background-color: var(--bg-surface-hover);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-reset:hover {
+    background-color: var(--border-color);
+}
 
 /* ==========================================================================
    6. Recent Activity List Styling
@@ -781,7 +817,7 @@ img {
         width: min(320px, 75vw);
         height: 100vh;
         transition: transform 0.3s ease;
-        z-index: 1000; /* Sidebar base layer */
+        z-index: 1050; /* Needs to be below hamburger but above layout */
         box-shadow: 5px 0 25px rgba(0,0,0,0.5); 
     }
 
@@ -813,7 +849,7 @@ img {
         margin: 0;
         flex-direction: row;
         border-top: none; 
-        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
         cursor: pointer;
     }
 

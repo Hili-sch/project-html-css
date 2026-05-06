@@ -4,22 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Agents Command Center</title>
-    <!-- Add Favicon - Colorful AI Icon -->
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6183/6183067.png" type="image/png">
     
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- CSS Theme Radios (For Light/Dark Mode Toggle) -->
     <input type="radio" name="theme" id="theme-dark" checked hidden>
     <input type="radio" name="theme" id="theme-light" hidden>
 
-    <!-- CSS Checkbox Hack for Mobile Menu -->
     <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
     <label for="mobile-menu-toggle" class="hamburger-btn">
         <span></span>
@@ -29,14 +25,12 @@
 
     <div class="dashboard-layout">
         
-        <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon">A</div>
                 <h2>AI AGENTS</h2>
             </div>
             
-            <!-- Sidebar search bar - Hidden on Desktop -->
             <div class="search-bar sidebar-search">
                 <span class="search-icon">🔍</span>
                 <input type="text" placeholder="Search Agents...">
@@ -53,7 +47,6 @@
             </nav>
             <div class="bottom-nav">
                 
-                <!-- Settings Dropdown Container -->
                 <div class="settings-container">
                     <input type="checkbox" id="settings-toggle" class="settings-toggle-chk" hidden>
                     <label for="settings-toggle" class="settings-backdrop"></label>
@@ -71,43 +64,35 @@
                     </div>
                 </div>
                 
-                <!-- User profile acts as a contact button (no link) -->
                 <div class="user-profile" title="Contact Hili">
                     <div class="avatar-wrapper">
                         <img src="https://randomuser.me/api/portraits/men/99.jpg" alt="User Avatar" class="avatar">
                         <span class="notification-badge">3</span>
                     </div>
-                    <!-- Desktop Info -->
                     <div class="user-info">
                         <span class="user-name">Hili Schlesinger</span>
                         <span class="user-role">SysAdmin</span>
                     </div>
-                    <!-- Mobile Info (Two Lines) -->
                     <span class="mobile-user-status">Hili<br>conect</span>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="main-content">
             
-            <!-- Page Header (Sticky) -->
             <header class="top-header">
                 <div class="header-title">
                     <h2>Command Center</h2>
                     <p>Manage, monitor and deploy your AI agents</p>
                 </div>
-                <!-- Main Search Bar (Hidden on Mobile) -->
                 <div class="search-bar main-search">
                     <span class="search-icon">🔍</span>
                     <input type="text" placeholder="Search Agents...">
                 </div>
             </header>
 
-            <!-- Bento Box Grid -->
             <div class="bento-grid" id="home">
                 
-                <!-- Card 1: Active Agents -->
                 <div class="bento-card stats-card" id="executions-stats">
                     <div class="card-header">
                         <h3>Active Agents</h3>
@@ -117,7 +102,6 @@
                     <div class="trend-line positive">↗ +15% this week</div>
                 </div>
 
-                <!-- Card 2: Total Executions -->
                 <div class="bento-card stats-card">
                     <div class="card-header">
                         <h3>Total Executions</h3>
@@ -128,7 +112,6 @@
                     </div>
                 </div>
 
-                <!-- Card 3: Token Usage -->
                 <div class="bento-card stats-card">
                     <div class="card-header">
                         <h3>Token Usage</h3>
@@ -137,7 +120,6 @@
                     <div class="trend-line warning">≈ 150k / day</div>
                 </div>
 
-                <!-- Card 4: System Health -->
                 <div class="bento-card stats-card">
                     <div class="card-header">
                         <h3>System Health</h3>
@@ -148,7 +130,6 @@
                     </div>
                 </div>
 
-                <!-- Card 5: Form (Create New Agent) -->
                 <div class="bento-card form-card" id="create-agent">
                     <h3>Create New Agent</h3>
                     <form action="https://formspree.io/f/xpqblzro" method="POST" class="agent-form">
@@ -184,7 +165,6 @@
                             </div>
                         </div>
 
-                        <!-- CSS Checkbox Hack for Toggle Switch -->
                         <div class="form-group toggle-group">
                             <span class="toggle-label-text">Status (Active)</span>
                             <div class="toggle-switch-container">
@@ -193,11 +173,13 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn-submit">Deploy Agent</button>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-submit">Deploy Agent</button>
+                            <button type="reset" class="btn-reset" title="Reset Form">Reset</button>
+                        </div>
                     </form>
                 </div>
 
-                <!-- Card 6: Agent Logs Table -->
                 <div class="bento-card table-card" id="agents-logs">
                     <h3>Agent Logs</h3>
                     <div class="table-wrapper custom-scrollbar">
@@ -212,7 +194,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- 25 AI Agents (with guaranteed male avatars) -->
                                 <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Agent"><span>Claude 3 Opus</span></div></td><td>Data analysis and processing</td><td><span class="badge badge-running">Running</span></td><td>20m 30s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
                                 <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Agent"><span>SysAdmin Bot</span></div></td><td>Routine system check</td><td><span class="badge badge-complete">Complete</span></td><td>2m 15s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
                                 <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Agent"><span>Data Miner</span></div></td><td>Scraping external sources</td><td><span class="badge badge-failed">Failed</span></td><td>1m 12s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
@@ -243,7 +224,6 @@
                     </div>
                 </div>
 
-                <!-- Card 7: Recent Activity -->
                 <div class="bento-card activity-card">
                     <h3>Recent Activity</h3>
                     <div class="activity-list custom-scrollbar">
