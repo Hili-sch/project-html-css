@@ -116,7 +116,8 @@ img {
     transition: all 0.3s ease;
 }
 
-.main-nav a:hover, .main-nav a.active {
+/* אפקט Hover על כפתורי הניווט */
+.main-nav a:hover {
     background-color: rgba(139, 92, 246, 0.1);
     color: var(--accent-primary);
     transform: translateX(5px); 
@@ -126,26 +127,40 @@ img {
     margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
+/* כפתור הגדרות מקבל את אותו עיצוב כמו שאר כפתורי הניווט */
 .settings-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
     color: var(--text-muted);
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.settings-btn:hover { color: var(--text-main); }
+.settings-btn:hover { 
+    background-color: rgba(139, 92, 246, 0.1);
+    color: var(--accent-primary);
+    transform: translateX(5px);
+}
 
+/* פרופיל המשתמש מתפקד ככפתור יצירת קשר */
 .user-profile {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--border-color);
+    cursor: pointer; /* הפיכת הסמן ליד מצביעה */
+    transition: opacity 0.3s ease;
+}
+
+.user-profile:hover {
+    opacity: 0.8; /* אפקט ריחוף עדין למצב כפתור */
 }
 
 .avatar-wrapper { position: relative; }
@@ -689,7 +704,7 @@ img {
     }
     .main-nav ul { gap: 1rem; }
 
-    /* פרופיל משתמש צף בצד שמאל למטה - רק בטאבלט ומובייל */
+    /* כפתור הפרופיל כווידג'ט צף למטה משמאל (רק טאבלט/מובייל) */
     .user-profile {
         position: fixed;
         bottom: 2vh;
@@ -702,7 +717,15 @@ img {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         margin: 0;
         flex-direction: row;
-        border-top: 1px solid var(--border-color);
+        border-top: none; /* ביטול הקו שהיה בדסקטופ */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    .user-profile:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        opacity: 1; /* דריסת השקיפות של הדסקטופ */
     }
 
     .user-info { display: none; } /* מסתיר את השם המלא מהדסקטופ */
