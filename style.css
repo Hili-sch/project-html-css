@@ -77,25 +77,36 @@ img {
 .he { display: none; }
 .he-input { display: none !important; }
 
-body:has(#lang-toggle:checked) .en { display: none !important; }
-body:has(#lang-toggle:checked) .en-input { display: none !important; }
+body:has(#lang-he:checked) .en { display: none !important; }
+body:has(#lang-he:checked) .en-input { display: none !important; }
 
-body:has(#lang-toggle:checked) .he { display: inline-block; }
-body:has(#lang-toggle:checked) .he-input { display: block !important; }
+body:has(#lang-he:checked) .he { display: inline-block; }
+body:has(#lang-he:checked) .he-input { display: block !important; }
 
-/* Apply RTL only to inner containers, leaving grid structure LTR */
-body:has(#lang-toggle:checked) .rtl-container {
+/* Invert the main layout for RTL */
+body:has(#lang-he:checked) .dashboard-layout {
+    direction: rtl;
+}
+
+/* BUT keep the bento grid cards in LTR order */
+body:has(#lang-he:checked) .bento-grid {
+    direction: ltr; 
+}
+
+/* Apply RTL only to inner containers */
+body:has(#lang-he:checked) .rtl-container {
     direction: rtl;
     text-align: right;
 }
 
-body:has(#lang-toggle:checked) .dashboard-layout {
-    direction: ltr; /* Ensure layout doesn't flip */
+/* Fix flex directions inside rtl-containers if needed */
+body:has(#lang-he:checked) .logo {
+    direction: ltr; 
 }
 
-/* Fix flex directions inside rtl-containers */
-body:has(#lang-toggle:checked) .logo {
-    direction: ltr; /* keep logo icon on left of text or let flex handle it */
+/* Align inputs to right in Hebrew */
+body:has(#lang-he:checked) .search-bar input {
+    margin-left: 0; margin-right: 0.5rem;
 }
 
 /* ==========================================================================
@@ -121,6 +132,12 @@ body:has(#lang-toggle:checked) .logo {
     z-index: 1050; 
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15); 
     transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Flip border in RTL */
+body:has(#lang-he:checked) .sidebar {
+    border-right: none;
+    border-left: 1px solid var(--border-color);
 }
 
 .logo {
@@ -173,8 +190,9 @@ body:has(#lang-toggle:checked) .logo {
     transform: translateX(5px); 
 }
 
-body:has(#lang-toggle:checked) .main-nav a:hover {
-    transform: translateX(-5px); /* Move left in Hebrew */
+/* Hover movement flip for RTL */
+body:has(#lang-he:checked) .main-nav a:hover {
+    transform: translateX(-5px); 
 }
 
 .bottom-nav {
@@ -191,6 +209,11 @@ body:has(#lang-toggle:checked) .main-nav a:hover {
     position: relative;
     width: 100%;
     z-index: 2000; 
+}
+
+/* Container specifically for the globe button to not stretch 100% */
+.lang-container {
+    width: auto; 
 }
 
 .settings-btn {
@@ -211,7 +234,7 @@ body:has(#lang-toggle:checked) .main-nav a:hover {
     transform: translateX(5px);
 }
 
-body:has(#lang-toggle:checked) .settings-btn:hover {
+body:has(#lang-he:checked) .settings-btn:hover {
     transform: translateX(-5px);
 }
 
@@ -245,6 +268,21 @@ body:has(#lang-toggle:checked) .settings-btn:hover {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+}
+
+/* Specific styling for Language Dropdown (opens downwards) */
+.lang-dropdown {
+    bottom: auto;
+    top: 130%;
+    left: auto;
+    right: 0;
+    width: 150px;
+}
+
+/* Flip language dropdown alignment in RTL */
+body:has(#lang-he:checked) .lang-dropdown {
+    left: 0;
+    right: auto;
 }
 
 .settings-toggle-chk:checked ~ .settings-dropdown {
@@ -283,12 +321,14 @@ body:has(#lang-toggle:checked) .settings-btn:hover {
     letter-spacing: 0.05em;
 }
 
-/* Highlight Active Theme/User in Dropdown */
+/* Highlight Active Theme/User/Language in Dropdown */
 body:has(#theme-light:checked) label[for="theme-light"],
 body:has(#theme-dark:checked) label[for="theme-dark"],
 body:has(#user-1:checked) .user-option-1,
 body:has(#user-2:checked) .user-option-2,
-body:has(#user-3:checked) .user-option-3 {
+body:has(#user-3:checked) .user-option-3,
+body:has(#lang-en:checked) .lang-option-en,
+body:has(#lang-he:checked) .lang-option-he {
     color: var(--accent-primary);
     background-color: rgba(139, 92, 246, 0.1);
 }
@@ -302,6 +342,7 @@ body:has(#user-3:checked) .user-option-3 {
     display: none !important;
 }
 
+/* Mobile Status defaults to hidden globally */
 .mobile-user-status {
     display: none !important;
 }
@@ -343,9 +384,21 @@ body:has(#user-3:checked) .activity-item.u-3 { display: flex !important; }
 @media (max-width: 1024px) {
     .user-info { display: none !important; }
     
-    body:has(#user-1:checked) .status-1,
-    body:has(#user-2:checked) .status-2,
-    body:has(#user-3:checked) .status-3 { display: block !important; }
+    /* Reveal the Admin/מנהל text only in mobile/tablet mode */
+    .mobile-user-status { 
+        display: block !important; 
+        font-size: 0.9rem;
+        color: var(--text-main);
+        font-weight: 600;
+        margin-left: 0.5rem;
+        text-align: left;
+    }
+    
+    body:has(#lang-he:checked) .mobile-user-status {
+        margin-left: 0;
+        margin-right: 0.5rem;
+        text-align: right;
+    }
 }
 
 /* User profile button */
@@ -432,7 +485,7 @@ body:has(#user-3:checked) .activity-item.u-3 { display: flex !important; }
     outline: none; margin-left: 0.5rem; width: 100%;
 }
 
-body:has(#lang-toggle:checked) .search-bar input {
+body:has(#lang-he:checked) .search-bar input {
     margin-left: 0; margin-right: 0.5rem;
 }
 
@@ -516,6 +569,10 @@ body:has(#lang-toggle:checked) .search-bar input {
 .data-table {
     width: 100%; border-collapse: collapse; text-align: left;
     position: relative; min-width: 600px; 
+}
+
+body:has(#lang-he:checked) .data-table {
+    text-align: right;
 }
 
 .data-table th, .data-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; }
@@ -608,8 +665,11 @@ body:has(#lang-toggle:checked) .search-bar input {
     background-color: white; border-radius: 50%; transition: transform 0.3s;
 }
 
+body:has(#lang-he:checked) .toggle-switch-label::after { left: auto; right: 2px; }
+
 .toggle-checkbox:checked + .toggle-switch-label { background-color: var(--accent-primary); }
 .toggle-checkbox:checked + .toggle-switch-label::after { transform: translateX(22px); }
+body:has(#lang-he:checked) .toggle-checkbox:checked + .toggle-switch-label::after { transform: translateX(-22px); }
 
 /* Form Actions (Submit 80% & Reset 20%) */
 .form-actions { display: flex; gap: 0.8rem; margin-top: 1rem; width: 100%; flex-direction: row; }
@@ -640,6 +700,8 @@ body:has(#lang-toggle:checked) .search-bar input {
     display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;
     overflow-y: auto; height: 55vh; max-height: 500px; padding-right: 0.5rem;
 }
+
+body:has(#lang-he:checked) .activity-list { padding-right: 0; padding-left: 0.5rem; }
 
 .activity-item { display: flex; align-items: flex-start; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
 .activity-item:last-child { border-bottom: none; padding-bottom: 0; }
@@ -700,7 +762,7 @@ body:has(#lang-toggle:checked) .search-bar input {
     }
 
     /* Flip hamburger button position in RTL */
-    body:has(#lang-toggle:checked) .hamburger-btn {
+    body:has(#lang-he:checked) .hamburger-btn {
         left: auto; right: 1.5rem;
     }
 
@@ -720,12 +782,12 @@ body:has(#lang-toggle:checked) .search-bar input {
     }
 
     /* Adjust sidebar slide in RTL */
-    body:has(#lang-toggle:checked) .sidebar {
+    body:has(#lang-he:checked) .sidebar {
         left: auto; right: calc(-1 * min(320px, 75vw)); 
     }
 
     .mobile-menu-toggle:checked ~ .dashboard-layout .sidebar { transform: translateX(min(320px, 75vw)); }
-    body:has(#lang-toggle:checked) .mobile-menu-toggle:checked ~ .dashboard-layout .sidebar { transform: translateX(calc(-1 * min(320px, 75vw))); }
+    body:has(#lang-he:checked) .mobile-menu-toggle:checked ~ .dashboard-layout .sidebar { transform: translateX(calc(-1 * min(320px, 75vw))); }
 
     .sidebar-search { display: flex; }
     .main-search { display: none; }
@@ -742,26 +804,17 @@ body:has(#lang-toggle:checked) .search-bar input {
     }
 
     /* Flip Profile button in RTL */
-    body:has(#lang-toggle:checked) .user-profile {
+    body:has(#lang-he:checked) .user-profile {
         left: auto; right: 3vw; padding: 6px 6px 6px 12px;
     }
 
     .user-profile:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); opacity: 1; }
     
-    .mobile-user-status {
-        font-size: 0.85rem; color: var(--text-main); font-weight: 500;
-        margin-left: 0.5rem; line-height: 1.1; text-align: left;
-    }
-    
-    body:has(#lang-toggle:checked) .mobile-user-status {
-        margin-left: 0; margin-right: 0.5rem; text-align: right;
-    }
-
     .avatar { width: 32px; height: 32px; }
     .notification-badge { width: 14px; height: 14px; font-size: 0.6rem; top: -2px; right: -2px; }
 
     .top-header { padding-left: 5rem; width: 100%; margin: 0; }
-    body:has(#lang-toggle:checked) .top-header { padding-left: 1.5rem; padding-right: 5rem; }
+    body:has(#lang-he:checked) .top-header { padding-left: 1.5rem; padding-right: 5rem; }
     
     .main-content { padding: 1.5rem; }
 
@@ -792,8 +845,8 @@ body:has(#lang-toggle:checked) .search-bar input {
     }
     
     .hamburger-btn { top: 1rem; left: 1rem; }
-    body:has(#lang-toggle:checked) .hamburger-btn { left: auto; right: 1rem; }
+    body:has(#lang-he:checked) .hamburger-btn { left: auto; right: 1rem; }
 
     .user-profile { bottom: 1.5rem; left: 1rem; }
-    body:has(#lang-toggle:checked) .user-profile { left: auto; right: 1rem; }
+    body:has(#lang-he:checked) .user-profile { left: auto; right: 1rem; }
 }

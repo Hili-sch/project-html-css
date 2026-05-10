@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Agents Command Center</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6183/6183067.png" type="image/png">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +20,8 @@
     <input type="radio" name="active-user" id="user-2" hidden>
     <input type="radio" name="active-user" id="user-3" hidden>
 
-    <input type="checkbox" id="lang-toggle" hidden>
+    <input type="radio" name="language" id="lang-en" checked hidden>
+    <input type="radio" name="language" id="lang-he" hidden>
 
     <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
     <label for="mobile-menu-toggle" class="hamburger-btn">
@@ -63,9 +65,9 @@
                     
                     <div class="settings-dropdown">
                         <span class="dropdown-label"><span class="en">Switch Account</span><span class="he">החלף חשבון</span></span>
-                        <label for="user-1" class="dropdown-item user-option-1"><span class="icon">👨🏻‍💼</span> Hili Schlesinger</label>
-                        <label for="user-2" class="dropdown-item user-option-2"><span class="icon">👨🏼‍💻</span> Alex Chen</label>
-                        <label for="user-3" class="dropdown-item user-option-3"><span class="icon">👨🏽‍🏫</span> Jordan Lee</label>
+                        <label for="user-1" class="dropdown-item user-option-1" onclick="document.getElementById('accounts-toggle').checked=false"><span class="icon">👨🏻‍💼</span> Hili Schlesinger</label>
+                        <label for="user-2" class="dropdown-item user-option-2" onclick="document.getElementById('accounts-toggle').checked=false"><span class="icon">👨🏼‍💻</span> Alex Chen</label>
+                        <label for="user-3" class="dropdown-item user-option-3" onclick="document.getElementById('accounts-toggle').checked=false"><span class="icon">👨🏽‍🏫</span> Jordan Lee</label>
                     </div>
                 </div>
 
@@ -78,11 +80,11 @@
                     </label>
                     
                     <div class="settings-dropdown">
-                        <label for="theme-light" class="dropdown-item theme-option"><span class="icon">☀️</span> <span class="en">Light Mode</span><span class="he">מצב בהיר</span></label>
-                        <label for="theme-dark" class="dropdown-item theme-option"><span class="icon">🌙</span> <span class="en">Dark Mode</span><span class="he">מצב כהה</span></label>
+                        <label for="theme-light" class="dropdown-item theme-option" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">☀️</span> <span class="en">Light Mode</span><span class="he">מצב בהיר</span></label>
+                        <label for="theme-dark" class="dropdown-item theme-option" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">🌙</span> <span class="en">Dark Mode</span><span class="he">מצב כהה</span></label>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><span class="icon">🔔</span> <span class="en">Notifications</span><span class="he">התראות</span></a>
-                        <a href="#" class="dropdown-item"><span class="icon">🔒</span> <span class="en">Privacy</span><span class="he">פרטיות</span></a>
+                        <a href="#" class="dropdown-item" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">🔔</span> <span class="en">Notifications</span><span class="he">התראות</span></a>
+                        <a href="#" class="dropdown-item" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">🔒</span> <span class="en">Privacy</span><span class="he">פרטיות</span></a>
                     </div>
                 </div>
                 
@@ -101,9 +103,10 @@
                         <span class="user-role"><span class="en">SysAdmin</span><span class="he">מנהל מערכת</span></span>
                     </div>
                     
-                    <span class="mobile-user-status status-1">Hili<br>conect</span>
-                    <span class="mobile-user-status status-2">Alex<br>conect</span>
-                    <span class="mobile-user-status status-3">Jordan<br>conect</span>
+                    <span class="mobile-user-status">
+                        <span class="en">Admin</span>
+                        <span class="he">מנהל</span>
+                    </span>
                 </div>
             </div>
         </aside>
@@ -123,7 +126,20 @@
                         <input type="text" class="he-input" placeholder="חפש סוכנים...">
                     </div>
                     
-                    <label for="lang-toggle" class="globe-btn" title="Switch Language">🌐</label>
+                    <div class="settings-container lang-container">
+                        <input type="checkbox" id="lang-menu-toggle" class="settings-toggle-chk" hidden>
+                        <label for="lang-menu-toggle" class="settings-backdrop"></label>
+                        
+                        <label for="lang-menu-toggle" class="globe-btn" title="Switch Language">
+                            🌐
+                        </label>
+                        
+                        <div class="settings-dropdown lang-dropdown">
+                            <span class="dropdown-label"><span class="en">Language</span><span class="he">שפה</span></span>
+                            <label for="lang-en" class="dropdown-item lang-option-en" onclick="document.getElementById('lang-menu-toggle').checked=false">🇺🇸 English</label>
+                            <label for="lang-he" class="dropdown-item lang-option-he" onclick="document.getElementById('lang-menu-toggle').checked=false">🇮🇱 עברית</label>
+                        </div>
+                    </div>
                 </div>
             </header>
 
