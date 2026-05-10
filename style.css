@@ -271,41 +271,55 @@ body:has(#user-3:checked) .user-option-3 {
 /* Hide all user-specific elements completely by default */
 .u-1, .u-2, .u-3,
 .avatar-1, .avatar-2, .avatar-3,
-.name-1, .name-2, .name-3 {
-    display: none !important;
-}
-
-/* The mobile status text has a specific default rule to prevent overriding desktop */
-.mobile-user-status {
+.name-1, .name-2, .name-3,
+.status-1, .status-2, .status-3 {
     display: none !important;
 }
 
 /* Show elements specific to User 1 */
-body:has(#user-1:checked) span.u-1,
-body:has(#user-1:checked) .name-1 { display: inline !important; }
-
-body:has(#user-1:checked) div.u-1,
+body:has(#user-1:checked) .u-1,
 body:has(#user-1:checked) .avatar-1 { display: block !important; }
 
+body:has(#user-1:checked) span.u-1 { display: inline !important; }
+
+body:has(#user-1:checked) .css-loader-wrapper.u-1,
 body:has(#user-1:checked) .activity-item.u-1 { display: flex !important; }
 
 /* Show elements specific to User 2 */
-body:has(#user-2:checked) span.u-2,
-body:has(#user-2:checked) .name-2 { display: inline !important; }
-
-body:has(#user-2:checked) div.u-2,
+body:has(#user-2:checked) .u-2,
 body:has(#user-2:checked) .avatar-2 { display: block !important; }
 
+body:has(#user-2:checked) span.u-2 { display: inline !important; }
+
+body:has(#user-2:checked) .css-loader-wrapper.u-2,
 body:has(#user-2:checked) .activity-item.u-2 { display: flex !important; }
 
 /* Show elements specific to User 3 */
-body:has(#user-3:checked) span.u-3,
-body:has(#user-3:checked) .name-3 { display: inline !important; }
-
-body:has(#user-3:checked) div.u-3,
+body:has(#user-3:checked) .u-3,
 body:has(#user-3:checked) .avatar-3 { display: block !important; }
 
+body:has(#user-3:checked) span.u-3 { display: inline !important; }
+
+body:has(#user-3:checked) .css-loader-wrapper.u-3,
 body:has(#user-3:checked) .activity-item.u-3 { display: flex !important; }
+
+/* Display rules for User Names (Desktop vs Mobile) */
+@media (min-width: 1025px) {
+    /* Show full names on desktop */
+    body:has(#user-1:checked) .name-1,
+    body:has(#user-2:checked) .name-2,
+    body:has(#user-3:checked) .name-3 { display: inline !important; }
+}
+
+@media (max-width: 1024px) {
+    /* Hide the entire user-info container on mobile/tablet */
+    .user-info { display: none !important; }
+    
+    /* Show short names on mobile/tablet */
+    body:has(#user-1:checked) .status-1,
+    body:has(#user-2:checked) .status-2,
+    body:has(#user-3:checked) .status-3 { display: block !important; }
+}
 
 /* User profile acts as a contact button */
 .user-profile {
@@ -316,7 +330,7 @@ body:has(#user-3:checked) .activity-item.u-3 { display: flex !important; }
     border-top: 1px solid var(--border-color);
     cursor: pointer; /* Change cursor to pointer */
     transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, visibility 0.3s ease;
-    z-index: 100; /* Keep lower than settings dropdown */
+    z-index: 100; /* Low z-index so it doesn't cover menus */
 }
 
 /* Subtle hover effect for button mode */
@@ -898,19 +912,6 @@ body:has(#user-3:checked) .activity-item.u-3 { display: flex !important; }
         padding: 1rem 1.5rem;
     }
     .main-nav ul { gap: 1rem; }
-
-    /* Display mobile status for active user in mobile/tablet mode */
-    body:has(#user-1:checked) .status-1,
-    body:has(#user-2:checked) .status-2,
-    body:has(#user-3:checked) .status-3 {
-        display: block !important; 
-        font-size: 0.85rem;
-        color: var(--text-main);
-        font-weight: 500;
-        margin-left: 0.5rem;
-        line-height: 1.1; 
-        text-align: left;
-    }
 
     /* Profile button as a floating widget bottom left (tablet/mobile only) */
     .user-profile {
