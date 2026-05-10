@@ -16,6 +16,10 @@
     <input type="radio" name="theme" id="theme-dark" checked hidden>
     <input type="radio" name="theme" id="theme-light" hidden>
 
+    <input type="radio" name="active-user" id="user-1" checked hidden>
+    <input type="radio" name="active-user" id="user-2" hidden>
+    <input type="radio" name="active-user" id="user-3" hidden>
+
     <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
     <label for="mobile-menu-toggle" class="hamburger-btn">
         <span></span>
@@ -48,6 +52,22 @@
             <div class="bottom-nav">
                 
                 <div class="settings-container">
+                    <input type="checkbox" id="accounts-toggle" class="settings-toggle-chk" hidden>
+                    <label for="accounts-toggle" class="settings-backdrop"></label>
+                    
+                    <label for="accounts-toggle" class="settings-btn">
+                        <span class="icon">👥</span> Accounts
+                    </label>
+                    
+                    <div class="settings-dropdown">
+                        <span class="dropdown-label">Switch Account</span>
+                        <label for="user-1" class="dropdown-item user-option-1"><span class="icon">👨🏻‍💼</span> Hili Schlesinger</label>
+                        <label for="user-2" class="dropdown-item user-option-2"><span class="icon">👨🏼‍💻</span> Alex Chen</label>
+                        <label for="user-3" class="dropdown-item user-option-3"><span class="icon">👨🏽‍🏫</span> Jordan Lee</label>
+                    </div>
+                </div>
+
+                <div class="settings-container">
                     <input type="checkbox" id="settings-toggle" class="settings-toggle-chk" hidden>
                     <label for="settings-toggle" class="settings-backdrop"></label>
                     
@@ -56,24 +76,32 @@
                     </label>
                     
                     <div class="settings-dropdown">
-                        <label for="theme-light" class="dropdown-item"><span class="icon">☀️</span> Light Mode</label>
-                        <label for="theme-dark" class="dropdown-item"><span class="icon">🌙</span> Dark Mode</label>
-                        <a href="#" class="dropdown-item"><span class="icon">👤</span> Account</a>
+                        <label for="theme-light" class="dropdown-item theme-option"><span class="icon">☀️</span> Light Mode</label>
+                        <label for="theme-dark" class="dropdown-item theme-option"><span class="icon">🌙</span> Dark Mode</label>
+                        <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item"><span class="icon">🔔</span> Notifications</a>
                         <a href="#" class="dropdown-item"><span class="icon">🔒</span> Privacy</a>
                     </div>
                 </div>
                 
-                <div class="user-profile" title="Contact Hili">
+                <div class="user-profile" title="Contact Current User">
                     <div class="avatar-wrapper">
-                        <img src="https://randomuser.me/api/portraits/men/99.jpg" alt="User Avatar" class="avatar">
+                        <img src="https://randomuser.me/api/portraits/men/99.jpg" alt="Hili Avatar" class="avatar avatar-1">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex Avatar" class="avatar avatar-2">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Jordan Avatar" class="avatar avatar-3">
                         <span class="notification-badge">3</span>
                     </div>
+                    
                     <div class="user-info">
-                        <span class="user-name">Hili Schlesinger</span>
+                        <span class="user-name name-1">Hili Schlesinger</span>
+                        <span class="user-name name-2">Alex Chen</span>
+                        <span class="user-name name-3">Jordan Lee</span>
                         <span class="user-role">SysAdmin</span>
                     </div>
-                    <span class="mobile-user-status">Hili<br>conect</span>
+                    
+                    <span class="mobile-user-status status-1">Hili<br>conect</span>
+                    <span class="mobile-user-status status-2">Alex<br>conect</span>
+                    <span class="mobile-user-status status-3">Jordan<br>conect</span>
                 </div>
             </div>
         </aside>
@@ -98,16 +126,34 @@
                         <h3>Active Agents</h3>
                         <span class="live-status"></span>
                     </div>
-                    <div class="stat-value">34</div>
-                    <div class="trend-line positive">↗ +15% this week</div>
+                    
+                    <div class="stat-value u-1">34</div>
+                    <div class="trend-line positive u-1">↗ +15% this week</div>
+                    
+                    <div class="stat-value u-2">12</div>
+                    <div class="trend-line danger u-2">↘ -5% this week</div>
+                    
+                    <div class="stat-value u-3">89</div>
+                    <div class="trend-line positive u-3">↗ +42% this week</div>
                 </div>
 
                 <div class="bento-card stats-card">
                     <div class="card-header">
                         <h3>Total Executions</h3>
                     </div>
-                    <div class="stat-value">12.5k</div>
-                    <div class="css-loader-wrapper">
+                    
+                    <div class="stat-value u-1">12.5k</div>
+                    <div class="css-loader-wrapper u-1">
+                        <span class="css-spinner"></span> Processing
+                    </div>
+                    
+                    <div class="stat-value u-2">3.2k</div>
+                    <div class="css-loader-wrapper u-2">
+                        <span class="css-spinner" style="border-top-color: var(--warning);"></span> Idle
+                    </div>
+                    
+                    <div class="stat-value u-3">45.1k</div>
+                    <div class="css-loader-wrapper u-3">
                         <span class="css-spinner"></span> Processing
                     </div>
                 </div>
@@ -116,17 +162,35 @@
                     <div class="card-header">
                         <h3>Token Usage</h3>
                     </div>
-                    <div class="stat-value">4.2M</div>
-                    <div class="trend-line warning">≈ 150k / day</div>
+                    
+                    <div class="stat-value u-1">4.2M</div>
+                    <div class="trend-line warning u-1">≈ 150k / day</div>
+                    
+                    <div class="stat-value u-2">850k</div>
+                    <div class="trend-line success u-2">≈ 30k / day</div>
+                    
+                    <div class="stat-value u-3">12.4M</div>
+                    <div class="trend-line danger u-3">≈ 400k / day</div>
                 </div>
 
                 <div class="bento-card stats-card">
                     <div class="card-header">
                         <h3>System Health</h3>
                     </div>
-                    <div class="stat-value">98%</div>
-                    <div class="progress-bar-container">
+                    
+                    <div class="stat-value u-1">98%</div>
+                    <div class="progress-bar-container u-1">
                         <div class="progress-bar" style="width: 98%;"></div>
+                    </div>
+                    
+                    <div class="stat-value u-2">82%</div>
+                    <div class="progress-bar-container u-2">
+                        <div class="progress-bar" style="width: 82%; background-color: var(--warning);"></div>
+                    </div>
+                    
+                    <div class="stat-value u-3">99%</div>
+                    <div class="progress-bar-container u-3">
+                        <div class="progress-bar" style="width: 99%;"></div>
                     </div>
                 </div>
 
@@ -227,6 +291,10 @@
                 <div class="bento-card activity-card">
                     <h3>Recent Activity</h3>
                     <div class="activity-list custom-scrollbar">
+                        <div class="activity-item u-1"><span class="activity-icon info">➕</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> deployed new agent</p><span class="activity-time">Just now</span></div></div>
+                        <div class="activity-item u-2"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Alex Chen</strong> restarted server</p><span class="activity-time">Just now</span></div></div>
+                        <div class="activity-item u-3"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Jordan Lee</strong> generated API keys</p><span class="activity-time">Just now</span></div></div>
+
                         <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Code Reviewer</strong> started job</p><span class="activity-time">Just now</span></div></div>
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SEO Optimizer</strong> completed report</p><span class="activity-time">2 mins ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>API Monitor</strong> connection failed</p><span class="activity-time">5 mins ago</span></div></div>
@@ -234,7 +302,6 @@
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>DB Optimizer</strong> reindexed tables</p><span class="activity-time">18 mins ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Security Scanner</strong> high latency</p><span class="activity-time">24 mins ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> analyzed data</p><span class="activity-time">30 mins ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">➕</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> deployed new agent</p><span class="activity-time">45 mins ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Network Analyzer</strong> started job</p><span class="activity-time">1 hour ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SysAdmin Bot</strong> routine check passed</p><span class="activity-time">1 hour ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>Content Gen</strong> API quota exceeded</p><span class="activity-time">2 hours ago</span></div></div>
@@ -243,7 +310,6 @@
                         <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Code Reviewer</strong> found 3 conflicts</p><span class="activity-time">3.5 hours ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>DB Optimizer</strong> cleared cache</p><span class="activity-time">4 hours ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Security Scanner</strong> started deep scan</p><span class="activity-time">4 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">⚙️</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> updated agent settings</p><span class="activity-time">5 hours ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Network Analyzer</strong> optimized routes</p><span class="activity-time">5.5 hours ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>Data Miner</strong> blocked by firewall</p><span class="activity-time">6 hours ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Content Gen</strong> drafted 3 articles</p><span class="activity-time">8 hours ago</span></div></div>
@@ -251,7 +317,6 @@
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> generated summary</p><span class="activity-time">14 hours ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>DB Optimizer</strong> storage reaching 90%</p><span class="activity-time">1 day ago</span></div></div>
                         <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SysAdmin Bot</strong> backed up database</p><span class="activity-time">1 day ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">➕</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> created API Monitor</p><span class="activity-time">2 days ago</span></div></div>
                     </div>
                 </div>
 

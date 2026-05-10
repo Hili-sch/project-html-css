@@ -38,7 +38,8 @@ body:has(#theme-light:checked) {
 
 html {
     scroll-behavior: smooth; 
-    scroll-padding-top: 110px; /* Fixes internal links scrolling behind sticky header */
+    /* This ensures internal anchor links don't hide behind the sticky header! */
+    scroll-padding-top: 110px; 
 }
 
 *, *::before, *::after {
@@ -155,7 +156,7 @@ img {
 }
 
 /* ==========================================================================
-   SETTINGS DROPDOWN MENU (No JS Checkbox Hack)
+   SETTINGS & ACCOUNTS DROPDOWN MENU (No JS Checkbox Hack)
    ========================================================================== */
 .settings-container {
     position: relative;
@@ -240,6 +241,72 @@ img {
     color: var(--accent-primary);
 }
 
+/* Dropdown UI improvements */
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.2rem 0;
+}
+.dropdown-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    padding: 0.3rem 1rem 0.1rem 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Highlight Active Theme/User in Dropdown */
+body:has(#theme-light:checked) label[for="theme-light"],
+body:has(#theme-dark:checked) label[for="theme-dark"],
+body:has(#user-1:checked) .user-option-1,
+body:has(#user-2:checked) .user-option-2,
+body:has(#user-3:checked) .user-option-3 {
+    color: var(--accent-primary);
+    background-color: rgba(139, 92, 246, 0.1);
+}
+
+/* ==========================================================================
+   MULTI-USER SWITCHING LOGIC (Zero-JS) - ALL CONTAINERS SEPARATED
+   ========================================================================== */
+/* Hide all user-specific elements completely by default */
+.u-1, .u-2, .u-3,
+.avatar-1, .avatar-2, .avatar-3,
+.name-1, .name-2, .name-3 {
+    display: none !important;
+}
+
+/* The mobile status text has a specific default rule to prevent overriding desktop */
+.mobile-user-status {
+    display: none !important;
+}
+
+/* Show elements specific to User 1 */
+body:has(#user-1:checked) span.u-1,
+body:has(#user-1:checked) .name-1 { display: inline !important; }
+
+body:has(#user-1:checked) div.u-1,
+body:has(#user-1:checked) .avatar-1 { display: block !important; }
+
+body:has(#user-1:checked) .activity-item.u-1 { display: flex !important; }
+
+/* Show elements specific to User 2 */
+body:has(#user-2:checked) span.u-2,
+body:has(#user-2:checked) .name-2 { display: inline !important; }
+
+body:has(#user-2:checked) div.u-2,
+body:has(#user-2:checked) .avatar-2 { display: block !important; }
+
+body:has(#user-2:checked) .activity-item.u-2 { display: flex !important; }
+
+/* Show elements specific to User 3 */
+body:has(#user-3:checked) span.u-3,
+body:has(#user-3:checked) .name-3 { display: inline !important; }
+
+body:has(#user-3:checked) div.u-3,
+body:has(#user-3:checked) .avatar-3 { display: block !important; }
+
+body:has(#user-3:checked) .activity-item.u-3 { display: flex !important; }
+
 /* User profile acts as a contact button */
 .user-profile {
     display: flex;
@@ -285,9 +352,6 @@ img {
 
 .user-info { display: flex; flex-direction: column; }
 .user-role { font-size: 0.8rem; color: var(--text-muted); }
-
-/* Mobile text - hidden on desktop */
-.mobile-user-status { display: none; }
 
 /* Hide user profile completely when mobile menu is active */
 .mobile-menu-toggle:checked ~ .dashboard-layout .user-profile {
@@ -835,6 +899,19 @@ img {
     }
     .main-nav ul { gap: 1rem; }
 
+    /* Display mobile status for active user in mobile/tablet mode */
+    body:has(#user-1:checked) .status-1,
+    body:has(#user-2:checked) .status-2,
+    body:has(#user-3:checked) .status-3 {
+        display: block !important; 
+        font-size: 0.85rem;
+        color: var(--text-main);
+        font-weight: 500;
+        margin-left: 0.5rem;
+        line-height: 1.1; 
+        text-align: left;
+    }
+
     /* Profile button as a floating widget bottom left (tablet/mobile only) */
     .user-profile {
         position: fixed;
@@ -858,20 +935,7 @@ img {
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         opacity: 1; 
     }
-
-    .user-info { display: none; } 
     
-    /* 2 lines layout with tighter line-height */
-    .mobile-user-status {
-        display: block; 
-        font-size: 0.85rem;
-        color: var(--text-main);
-        font-weight: 500;
-        margin-left: 0.5rem;
-        line-height: 1.1; 
-        text-align: left;
-    }
-
     .avatar { width: 32px; height: 32px; }
     .notification-badge { width: 14px; height: 14px; font-size: 0.6rem; top: -2px; right: -2px; }
 
