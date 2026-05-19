@@ -363,11 +363,9 @@ body:has(#lang-he:checked) .activity-list { padding-right: 0; padding-left: 0.5r
     .sidebar-search { display: flex !important; }
     .main-search { display: none !important; }
 
-    /* Show sidebar language menu, hide header language menu */
     .sidebar-lang { display: block !important; }
     .header-lang { display: none !important; }
 
-    /* FIXED: Removed transform to prevent it from acting as a Containing Block for the fixed user-profile */
     .sidebar { 
         position: fixed; top: 0; left: -100vw; 
         width: min(320px, 75vw); height: 100vh; 
@@ -384,8 +382,21 @@ body:has(#lang-he:checked) .activity-list { padding-right: 0; padding-left: 0.5r
         right: 0; left: auto; box-shadow: -5px 0 25px rgba(0,0,0,0.5); 
     }
 
-    .main-nav a { font-size: 1.25rem; padding: 1rem 1.5rem; }
-    .main-nav ul { gap: 1rem; }
+    /* UPDATED: Dynamic sizing based on viewport height (vh) to prevent overflow */
+    .main-nav a { 
+        font-size: clamp(0.85rem, 2.2vh, 1.15rem); 
+        padding: clamp(0.4rem, 1.2vh, 0.8rem) 1.5rem; 
+    }
+    .main-nav ul { 
+        gap: clamp(0.2rem, 1vh, 0.8rem); 
+    }
+    .settings-btn {
+        padding: clamp(0.4rem, 1.2vh, 0.75rem) 1rem;
+        font-size: clamp(0.85rem, 2.2vh, 1rem);
+    }
+    .bottom-nav {
+        gap: clamp(0.3rem, 1.2vh, 0.8rem);
+    }
 
     .user-info { display: none !important; }
     .mobile-user-status { display: flex !important; align-items: center; gap: 0.25rem; font-size: 0.9rem; }
