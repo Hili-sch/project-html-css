@@ -382,7 +382,23 @@ body:has(#lang-he:checked) .activity-list { padding-right: 0; padding-left: 0.5r
         right: 0; left: auto; box-shadow: -5px 0 25px rgba(0,0,0,0.5); 
     }
 
-    /* UPDATED: Dynamic sizing based on viewport height (vh) to prevent overflow */
+    /* NEW: Scaling everything in the sidebar based on viewport height (vh) */
+    .sidebar .logo { margin-bottom: clamp(1rem, 2.5vh, 2rem); }
+    .sidebar .logo h2 { font-size: clamp(1rem, 2.5vh, 1.5rem); }
+    .sidebar .logo-icon { 
+        width: clamp(2rem, 5vh, 2.5rem); 
+        height: clamp(2rem, 5vh, 2.5rem); 
+        font-size: clamp(1rem, 2.5vh, 1.2rem); 
+    }
+
+    .sidebar-search { margin-bottom: clamp(1rem, 2.5vh, 1.5rem); }
+    .sidebar-search .search-bar { 
+        padding: clamp(0.3rem, 1vh, 0.6rem) clamp(0.8rem, 2vw, 1.2rem); 
+    }
+    .sidebar-search input, .sidebar-search .search-icon { 
+        font-size: clamp(0.85rem, 2.2vh, 1rem); 
+    }
+
     .main-nav a { 
         font-size: clamp(0.85rem, 2.2vh, 1.15rem); 
         padding: clamp(0.4rem, 1.2vh, 0.8rem) 1.5rem; 
@@ -390,9 +406,17 @@ body:has(#lang-he:checked) .activity-list { padding-right: 0; padding-left: 0.5r
     .main-nav ul { 
         gap: clamp(0.2rem, 1vh, 0.8rem); 
     }
+    
     .settings-btn {
         padding: clamp(0.4rem, 1.2vh, 0.75rem) 1rem;
         font-size: clamp(0.85rem, 2.2vh, 1rem);
+    }
+    .dropdown-item {
+        font-size: clamp(0.8rem, 2vh, 0.9rem);
+        padding: clamp(0.4rem, 1vh, 0.6rem) 1rem;
+    }
+    .dropdown-label {
+        font-size: clamp(0.65rem, 1.5vh, 0.7rem);
     }
     .bottom-nav {
         gap: clamp(0.3rem, 1.2vh, 0.8rem);
