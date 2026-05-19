@@ -15,10 +15,13 @@
 
     <input type="radio" name="theme" id="theme-dark" checked hidden>
     <input type="radio" name="theme" id="theme-light" hidden>
-
+    
     <input type="radio" name="active-user" id="user-1" checked hidden>
     <input type="radio" name="active-user" id="user-2" hidden>
     <input type="radio" name="active-user" id="user-3" hidden>
+
+    <input type="radio" name="language" id="lang-en" checked hidden>
+    <input type="radio" name="language" id="lang-he" hidden>
 
     <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
     <label for="mobile-menu-toggle" class="hamburger-btn">
@@ -29,41 +32,58 @@
 
     <div class="dashboard-layout">
         
-        <aside class="sidebar">
+        <aside class="sidebar rtl-container">
             <div class="logo">
                 <div class="logo-icon">A</div>
-                <h2>AI AGENTS</h2>
+                <h2><span class="en">AI AGENTS</span><span class="he">סוכני AI</span></h2>
             </div>
             
             <div class="search-bar sidebar-search">
                 <span class="search-icon">🔍</span>
-                <input type="text" placeholder="Search Agents...">
+                <input type="text" class="en-input" placeholder="Search Agents...">
+                <input type="text" class="he-input" placeholder="חפש סוכנים...">
             </div>
 
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#home"><span class="icon">🏠</span> Home</a></li>
-                    <li><a href="#agents-logs"><span class="icon">🤖</span> Agents</a></li>
-                    <li><a href="#executions-stats"><span class="icon">⚡</span> Executions</a></li>
-                    <li><a href="#create-agent"><span class="icon">➕</span> Create Agent</a></li>
-                    <li><a href="#home"><span class="icon">📊</span> Analytics</a></li>
+                    <li><a href="#home"><span class="icon">🏠</span> <span class="en">Home</span><span class="he">ראשי</span></a></li>
+                    <li><a href="#agents-logs"><span class="icon">🤖</span> <span class="en">Agents</span><span class="he">סוכנים</span></a></li>
+                    <li><a href="#executions-stats"><span class="icon">⚡</span> <span class="en">Executions</span><span class="he">ביצועים</span></a></li>
+                    <li><a href="#create-agent"><span class="icon">➕</span> <span class="en">Create Agent</span><span class="he">צור סוכן</span></a></li>
+                    <li><a href="#home"><span class="icon">📊</span> <span class="en">Analytics</span><span class="he">אנליטיקה</span></a></li>
                 </ul>
             </nav>
             <div class="bottom-nav">
                 
+                <!-- NEW: Sidebar Language Toggle (Mobile/Tablet Only) -->
+                <div class="settings-container sidebar-lang">
+                    <input type="checkbox" id="sidebar-lang-toggle" class="settings-toggle-chk" hidden>
+                    <label for="sidebar-lang-toggle" class="settings-backdrop"></label>
+                    
+                    <label for="sidebar-lang-toggle" class="settings-btn">
+                        <span class="icon">🌐</span> <span class="en">Language</span><span class="he">שפה</span>
+                    </label>
+                    
+                    <div class="settings-dropdown">
+                        <span class="dropdown-label"><span class="en">Select Language</span><span class="he">בחר שפה</span></span>
+                        <label for="lang-en" class="dropdown-item lang-option-en" onclick="document.getElementById('sidebar-lang-toggle').checked=false">🇺🇸 English</label>
+                        <label for="lang-he" class="dropdown-item lang-option-he" onclick="document.getElementById('sidebar-lang-toggle').checked=false">🇮🇱 עברית</label>
+                    </div>
+                </div>
+
                 <div class="settings-container">
                     <input type="checkbox" id="accounts-toggle" class="settings-toggle-chk" hidden>
                     <label for="accounts-toggle" class="settings-backdrop"></label>
                     
                     <label for="accounts-toggle" class="settings-btn">
-                        <span class="icon">👥</span> Accounts
+                        <span class="icon">👥</span> <span class="en">Accounts</span><span class="he">חשבונות</span>
                     </label>
                     
                     <div class="settings-dropdown">
-                        <span class="dropdown-label">Switch Account</span>
-                        <label for="user-1" class="dropdown-item user-option-1"><span class="icon">👨🏻‍💼</span> Hili Schlesinger</label>
-                        <label for="user-2" class="dropdown-item user-option-2"><span class="icon">👨🏼‍💻</span> Alex Chen</label>
-                        <label for="user-3" class="dropdown-item user-option-3"><span class="icon">👨🏽‍🏫</span> Jordan Lee</label>
+                        <span class="dropdown-label"><span class="en">Switch Account</span><span class="he">החלף חשבון</span></span>
+                        <label for="user-1" class="dropdown-item user-option-1" onclick="document.getElementById('accounts-toggle').checked=false"><span class="icon">👨🏻‍💼</span> Hili Schlesinger</label>
+                        <label for="user-2" class="dropdown-item user-option-2" onclick="document.getElementById('accounts-toggle').checked=false"><span class="icon">👨🏼‍💻</span> Alex Chen</label>
+                        <label for="user-3" class="dropdown-item user-option-3" onclick="document.getElementById('accounts-toggle').checked=false"><span class="icon">👨🏽‍🏫</span> Jordan Lee</label>
                     </div>
                 </div>
 
@@ -72,15 +92,15 @@
                     <label for="settings-toggle" class="settings-backdrop"></label>
                     
                     <label for="settings-toggle" class="settings-btn">
-                        <span class="icon">⚙️</span> Settings
+                        <span class="icon">⚙️</span> <span class="en">Settings</span><span class="he">הגדרות</span>
                     </label>
                     
                     <div class="settings-dropdown">
-                        <label for="theme-light" class="dropdown-item theme-option"><span class="icon">☀️</span> Light Mode</label>
-                        <label for="theme-dark" class="dropdown-item theme-option"><span class="icon">🌙</span> Dark Mode</label>
+                        <label for="theme-light" class="dropdown-item theme-option" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">☀️</span> <span class="en">Light Mode</span><span class="he">מצב בהיר</span></label>
+                        <label for="theme-dark" class="dropdown-item theme-option" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">🌙</span> <span class="en">Dark Mode</span><span class="he">מצב כהה</span></label>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><span class="icon">🔔</span> Notifications</a>
-                        <a href="#" class="dropdown-item"><span class="icon">🔒</span> Privacy</a>
+                        <a href="#" class="dropdown-item" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">🔔</span> <span class="en">Notifications</span><span class="he">התראות</span></a>
+                        <a href="#" class="dropdown-item" onclick="document.getElementById('settings-toggle').checked=false"><span class="icon">🔒</span> <span class="en">Privacy</span><span class="he">פרטיות</span></a>
                     </div>
                 </div>
                 
@@ -96,121 +116,116 @@
                         <span class="user-name name-1">Hili Schlesinger</span>
                         <span class="user-name name-2">Alex Chen</span>
                         <span class="user-name name-3">Jordan Lee</span>
-                        <span class="user-role">SysAdmin</span>
+                        <span class="user-role"><span class="en">SysAdmin</span><span class="he">מנהל מערכת</span></span>
                     </div>
                     
-                    <span class="mobile-user-status status-1">Hili<br>conect</span>
-                    <span class="mobile-user-status status-2">Alex<br>conect</span>
-                    <span class="mobile-user-status status-3">Jordan<br>conect</span>
+                    <span class="mobile-user-status">
+                        <span class="en">Admin</span>
+                        <span class="he">מנהל</span>
+                    </span>
                 </div>
             </div>
         </aside>
 
         <main class="main-content">
             
-            <header class="top-header">
+            <header class="top-header rtl-container">
                 <div class="header-title">
-                    <h2>Command Center</h2>
-                    <p>Manage, monitor and deploy your AI agents</p>
+                    <h2><span class="en">Command Center</span><span class="he">מרכז בקרה</span></h2>
+                    <p><span class="en">Manage, monitor and deploy your AI agents</span><span class="he">נהל, נטר ופרוס את סוכני ה-AI שלך</span></p>
                 </div>
-                <div class="search-bar main-search">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" placeholder="Search Agents...">
+                
+                <div class="header-actions">
+                    <div class="search-bar main-search">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="en-input" placeholder="Search Agents...">
+                        <input type="text" class="he-input" placeholder="חפש סוכנים...">
+                    </div>
+                    
+                    <!-- ADDED: header-lang class for desktop-only display -->
+                    <div class="settings-container lang-container header-lang">
+                        <input type="checkbox" id="lang-menu-toggle" class="settings-toggle-chk" hidden>
+                        <label for="lang-menu-toggle" class="settings-backdrop"></label>
+                        
+                        <label for="lang-menu-toggle" class="globe-btn" title="Switch Language">
+                            🌐
+                        </label>
+                        
+                        <div class="settings-dropdown lang-dropdown">
+                            <span class="dropdown-label"><span class="en">Language</span><span class="he">שפה</span></span>
+                            <label for="lang-en" class="dropdown-item lang-option-en" onclick="document.getElementById('lang-menu-toggle').checked=false">🇺🇸 English</label>
+                            <label for="lang-he" class="dropdown-item lang-option-he" onclick="document.getElementById('lang-menu-toggle').checked=false">🇮🇱 עברית</label>
+                        </div>
+                    </div>
                 </div>
             </header>
 
             <div class="bento-grid" id="home">
                 
-                <div class="bento-card stats-card" id="executions-stats">
+                <div class="bento-card stats-card rtl-container" id="executions-stats">
                     <div class="card-header">
-                        <h3>Active Agents</h3>
+                        <h3><span class="en">Active Agents</span><span class="he">סוכנים פעילים</span></h3>
                         <span class="live-status"></span>
                     </div>
-                    
                     <div class="stat-value u-1">34</div>
-                    <div class="trend-line positive u-1">↗ +15% this week</div>
-                    
+                    <div class="trend-line positive u-1"><span class="en">↗ +15% this week</span><span class="he">↗ +15% השבוע</span></div>
                     <div class="stat-value u-2">12</div>
-                    <div class="trend-line danger u-2">↘ -5% this week</div>
-                    
+                    <div class="trend-line danger u-2"><span class="en">↘ -5% this week</span><span class="he">↘ -5% השבוע</span></div>
                     <div class="stat-value u-3">89</div>
-                    <div class="trend-line positive u-3">↗ +42% this week</div>
+                    <div class="trend-line positive u-3"><span class="en">↗ +42% this week</span><span class="he">↗ +42% השבוע</span></div>
                 </div>
 
-                <div class="bento-card stats-card">
+                <div class="bento-card stats-card rtl-container">
                     <div class="card-header">
-                        <h3>Total Executions</h3>
+                        <h3><span class="en">Total Executions</span><span class="he">סה"כ ביצועים</span></h3>
                     </div>
-                    
                     <div class="stat-value u-1">12.5k</div>
-                    <div class="css-loader-wrapper u-1">
-                        <span class="css-spinner"></span> Processing
-                    </div>
-                    
+                    <div class="css-loader-wrapper u-1"><span class="css-spinner"></span> <span class="en">Processing</span><span class="he">מעבד</span></div>
                     <div class="stat-value u-2">3.2k</div>
-                    <div class="css-loader-wrapper u-2">
-                        <span class="css-spinner" style="border-top-color: var(--warning);"></span> Idle
-                    </div>
-                    
+                    <div class="css-loader-wrapper u-2"><span class="css-spinner" style="border-top-color: var(--warning);"></span> <span class="en">Idle</span><span class="he">ממתין</span></div>
                     <div class="stat-value u-3">45.1k</div>
-                    <div class="css-loader-wrapper u-3">
-                        <span class="css-spinner"></span> Processing
-                    </div>
+                    <div class="css-loader-wrapper u-3"><span class="css-spinner"></span> <span class="en">Processing</span><span class="he">מעבד</span></div>
                 </div>
 
-                <div class="bento-card stats-card">
+                <div class="bento-card stats-card rtl-container">
                     <div class="card-header">
-                        <h3>Token Usage</h3>
+                        <h3><span class="en">Token Usage</span><span class="he">שימוש בטוקנים</span></h3>
                     </div>
-                    
                     <div class="stat-value u-1">4.2M</div>
-                    <div class="trend-line warning u-1">≈ 150k / day</div>
-                    
+                    <div class="trend-line warning u-1">≈ 150k / <span class="en">day</span><span class="he">יום</span></div>
                     <div class="stat-value u-2">850k</div>
-                    <div class="trend-line success u-2">≈ 30k / day</div>
-                    
+                    <div class="trend-line success u-2">≈ 30k / <span class="en">day</span><span class="he">יום</span></div>
                     <div class="stat-value u-3">12.4M</div>
-                    <div class="trend-line danger u-3">≈ 400k / day</div>
+                    <div class="trend-line danger u-3">≈ 400k / <span class="en">day</span><span class="he">יום</span></div>
                 </div>
 
-                <div class="bento-card stats-card">
+                <div class="bento-card stats-card rtl-container">
                     <div class="card-header">
-                        <h3>System Health</h3>
+                        <h3><span class="en">System Health</span><span class="he">בריאות מערכת</span></h3>
                     </div>
-                    
                     <div class="stat-value u-1">98%</div>
-                    <div class="progress-bar-container u-1">
-                        <div class="progress-bar" style="width: 98%;"></div>
-                    </div>
-                    
+                    <div class="progress-bar-container u-1"><div class="progress-bar" style="width: 98%;"></div></div>
                     <div class="stat-value u-2">82%</div>
-                    <div class="progress-bar-container u-2">
-                        <div class="progress-bar" style="width: 82%; background-color: var(--warning);"></div>
-                    </div>
-                    
+                    <div class="progress-bar-container u-2"><div class="progress-bar" style="width: 82%; background-color: var(--warning);"></div></div>
                     <div class="stat-value u-3">99%</div>
-                    <div class="progress-bar-container u-3">
-                        <div class="progress-bar" style="width: 99%;"></div>
-                    </div>
+                    <div class="progress-bar-container u-3"><div class="progress-bar" style="width: 99%;"></div></div>
                 </div>
 
-                <div class="bento-card form-card" id="create-agent">
-                    <h3>Create New Agent</h3>
+                <div class="bento-card form-card rtl-container" id="create-agent">
+                    <h3><span class="en">Create New Agent</span><span class="he">צור סוכן חדש</span></h3>
                     <form action="https://formspree.io/f/xpqblzro" method="POST" class="agent-form">
-                        
                         <div class="form-group">
-                            <label for="agentName">Agent Name</label>
-                            <input type="text" id="agentName" name="agentName" required placeholder="e.g. DataScraper_01" minlength="3">
+                            <label for="agentName"><span class="en">Agent Name</span><span class="he">שם הסוכן</span></label>
+                            <input type="text" id="agentName_en" name="agentName" class="en-input" required placeholder="e.g. DataScraper_01" minlength="3">
+                            <input type="text" id="agentName_he" name="agentName" class="he-input" required placeholder="לדוגמה DataScraper_01" minlength="3">
                         </div>
-
                         <div class="form-group">
-                            <label for="adminEmail">Admin Email</label>
+                            <label for="adminEmail"><span class="en">Admin Email</span><span class="he">אימייל מנהל</span></label>
                             <input type="email" id="adminEmail" name="adminEmail" required placeholder="admin@domain.com">
                         </div>
-
                         <div class="form-group">
-                            <label for="modelSelect">Select Model</label>
-                            <select id="modelSelect" name="model" required>
+                            <label for="modelSelect"><span class="en">Select Model</span><span class="he">בחר מודל</span></label>
+                            <select id="modelSelect_en" name="model" class="en-input" required>
                                 <option value="" disabled selected>Choose a model...</option>
                                 <option value="gpt4o">GPT-4o</option>
                                 <option value="claude3opus">Claude 3 Opus</option>
@@ -219,104 +234,69 @@
                                 <option value="llama3">Llama 3 (70B)</option>
                                 <option value="mixtral">Mixtral 8x22B</option>
                             </select>
+                            <select id="modelSelect_he" name="model" class="he-input" required>
+                                <option value="" disabled selected>בחר מודל...</option>
+                                <option value="gpt4o">GPT-4o</option>
+                                <option value="claude3opus">Claude 3 Opus</option>
+                                <option value="gemini15pro">Gemini 1.5 Pro</option>
+                                <option value="claude3sonnet">Claude 3.5 Sonnet</option>
+                                <option value="llama3">Llama 3 (70B)</option>
+                                <option value="mixtral">Mixtral 8x22B</option>
+                            </select>
                         </div>
-
                         <div class="form-group checkbox-group">
-                            <label>Capabilities</label>
+                            <label><span class="en">Capabilities</span><span class="he">יכולות</span></label>
                             <div class="checkbox-options">
-                                <label><input type="checkbox" name="capabilities" value="vision"> Vision</label>
-                                <label><input type="checkbox" name="capabilities" value="planning"> Planning</label>
+                                <label><input type="checkbox" name="capabilities" value="vision"> <span class="en">Vision</span><span class="he">ראייה</span></label>
+                                <label><input type="checkbox" name="capabilities" value="planning"> <span class="en">Planning</span><span class="he">תכנון</span></label>
                             </div>
                         </div>
-
                         <div class="form-group toggle-group">
-                            <span class="toggle-label-text">Status (Active)</span>
+                            <span class="toggle-label-text"><span class="en">Status (Active)</span><span class="he">סטטוס (פעיל)</span></span>
                             <div class="toggle-switch-container">
                                 <input type="checkbox" id="statusToggle" name="status" class="toggle-checkbox" checked>
                                 <label for="statusToggle" class="toggle-switch-label"></label>
                             </div>
                         </div>
-
                         <div class="form-actions">
-                            <button type="submit" class="btn-submit">Deploy Agent</button>
-                            <button type="reset" class="btn-reset" title="Reset Form">Reset</button>
+                            <button type="submit" class="btn-submit"><span class="en">Deploy Agent</span><span class="he">פרוס סוכן</span></button>
+                            <button type="reset" class="btn-reset" title="Reset Form"><span class="en">Reset</span><span class="he">אפס</span></button>
                         </div>
                     </form>
                 </div>
 
-                <div class="bento-card table-card" id="agents-logs">
-                    <h3>Agent Logs</h3>
+                <div class="bento-card table-card rtl-container" id="agents-logs">
+                    <h3><span class="en">Agent Logs</span><span class="he">יומן סוכנים</span></h3>
                     <div class="table-wrapper custom-scrollbar">
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th>Agent</th>
-                                    <th>Tasks</th>
-                                    <th>Status</th>
-                                    <th>Duration</th>
-                                    <th>Actions</th>
+                                    <th><span class="en">Agent</span><span class="he">סוכן</span></th>
+                                    <th><span class="en">Tasks</span><span class="he">משימות</span></th>
+                                    <th><span class="en">Status</span><span class="he">סטטוס</span></th>
+                                    <th><span class="en">Duration</span><span class="he">משך זמן</span></th>
+                                    <th><span class="en">Actions</span><span class="he">פעולות</span></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Agent"><span>Claude 3 Opus</span></div></td><td>Data analysis and processing</td><td><span class="badge badge-running">Running</span></td><td>20m 30s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Agent"><span>SysAdmin Bot</span></div></td><td>Routine system check</td><td><span class="badge badge-complete">Complete</span></td><td>2m 15s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Agent"><span>Data Miner</span></div></td><td>Scraping external sources</td><td><span class="badge badge-failed">Failed</span></td><td>1m 12s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Agent"><span>Code Reviewer</span></div></td><td>Analyzing pull requests</td><td><span class="badge badge-running">Running</span></td><td>45m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/5.jpg" alt="Agent"><span>SEO Optimizer</span></div></td><td>Keyword gap analysis</td><td><span class="badge badge-complete">Complete</span></td><td>15m 00s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Agent"><span>Security Scanner</span></div></td><td>Vulnerability assessment</td><td><span class="badge badge-running">Running</span></td><td>1h 20m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/7.jpg" alt="Agent"><span>DB Optimizer</span></div></td><td>Index rebuilding</td><td><span class="badge badge-complete">Complete</span></td><td>8m 45s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/8.jpg" alt="Agent"><span>API Monitor</span></div></td><td>Latency checking</td><td><span class="badge badge-failed">Failed</span></td><td>0m 30s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/9.jpg" alt="Agent"><span>Content Gen</span></div></td><td>Drafting blog posts</td><td><span class="badge badge-running">Running</span></td><td>12m 05s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/10.jpg" alt="Agent"><span>Network Analyzer</span></div></td><td>Traffic routing optimization</td><td><span class="badge badge-complete">Complete</span></td><td>34m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Agent"><span>Task Master</span></div></td><td>Managing sub-tasks</td><td><span class="badge badge-running">Running</span></td><td>10m 05s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Agent"><span>Build Bot</span></div></td><td>Compiling latest build</td><td><span class="badge badge-complete">Complete</span></td><td>5m 20s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/13.jpg" alt="Agent"><span>QA Tester</span></div></td><td>Running unit tests</td><td><span class="badge badge-failed">Failed</span></td><td>2m 50s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/14.jpg" alt="Agent"><span>Log Aggregator</span></div></td><td>Collecting server logs</td><td><span class="badge badge-running">Running</span></td><td>30m 15s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Agent"><span>Metric Scraper</span></div></td><td>Fetching KPI metrics</td><td><span class="badge badge-complete">Complete</span></td><td>12m 40s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/16.jpg" alt="Agent"><span>Backup Manager</span></div></td><td>Syncing cloud storage</td><td><span class="badge badge-running">Running</span></td><td>1h 45m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/17.jpg" alt="Agent"><span>Image Processor</span></div></td><td>Compressing media files</td><td><span class="badge badge-complete">Complete</span></td><td>4m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/18.jpg" alt="Agent"><span>Email Parser</span></div></td><td>Sorting inbox tickets</td><td><span class="badge badge-running">Running</span></td><td>8m 30s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/19.jpg" alt="Agent"><span>Video Encoder</span></div></td><td>Rendering assets</td><td><span class="badge badge-running">Running</span></td><td>2h 10m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Agent"><span>Text Summarizer</span></div></td><td>Generating reports</td><td><span class="badge badge-complete">Complete</span></td><td>1m 20s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/21.jpg" alt="Agent"><span>Auth Guardian</span></div></td><td>Checking user logins</td><td><span class="badge badge-running">Running</span></td><td>15h 00m</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Agent"><span>Cache Clearer</span></div></td><td>Purging stale data</td><td><span class="badge badge-complete">Complete</span></td><td>0m 45s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Agent"><span>Support AI</span></div></td><td>Answering tickets</td><td><span class="badge badge-failed">Failed</span></td><td>5m 12s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/24.jpg" alt="Agent"><span>Social Poster</span></div></td><td>Publishing updates</td><td><span class="badge badge-complete">Complete</span></td><td>1m 00s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
-                                <tr><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/25.jpg" alt="Agent"><span>Data Cleanser</span></div></td><td>Removing duplicates</td><td><span class="badge badge-running">Running</span></td><td>40m 10s</td><td class="actions-cell"><button class="icon-btn" data-tooltip="Edit">✏️</button><button class="icon-btn" data-tooltip="Delete">🗑️</button></td></tr>
+                                <tr class="u-1"><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Agent"><span>Claude 3 Opus</span></div></td><td><span class="en">Data analysis and processing</span><span class="he">ניתוח ועיבוד נתונים</span></td><td><span class="badge badge-running"><span class="en">Running</span><span class="he">רץ</span></span></td><td>20m 30s</td><td class="actions-cell"><button class="icon-btn">✏️</button><button class="icon-btn">🗑️</button></td></tr>
+                                <tr class="u-1"><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Agent"><span>SysAdmin Bot</span></div></td><td><span class="en">Routine system check</span><span class="he">בדיקת מערכת שגרתית</span></td><td><span class="badge badge-complete"><span class="en">Complete</span><span class="he">הושלם</span></span></td><td>2m 15s</td><td class="actions-cell"><button class="icon-btn">✏️</button><button class="icon-btn">🗑️</button></td></tr>
+                                <tr class="u-1"><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Agent"><span>Data Miner</span></div></td><td><span class="en">Scraping external sources</span><span class="he">איסוף מקורות חיצוניים</span></td><td><span class="badge badge-failed"><span class="en">Failed</span><span class="he">נכשל</span></span></td><td>1m 12s</td><td class="actions-cell"><button class="icon-btn">✏️</button><button class="icon-btn">🗑️</button></td></tr>
+                                <tr class="u-2"><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Agent"><span>Docker Manager</span></div></td><td><span class="en">Container orchestration</span><span class="he">ניהול קונטיינרים</span></td><td><span class="badge badge-running"><span class="en">Running</span><span class="he">רץ</span></span></td><td>3h 45m</td><td class="actions-cell"><button class="icon-btn">✏️</button><button class="icon-btn">🗑️</button></td></tr>
+                                <tr class="u-2"><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Agent"><span>K8s Scaler</span></div></td><td><span class="en">Auto-scaling clusters</span><span class="he">קנה מידה אוטומטי לשרתים</span></td><td><span class="badge badge-complete"><span class="en">Complete</span><span class="he">הושלם</span></span></td><td>1m 20s</td><td class="actions-cell"><button class="icon-btn">✏️</button><button class="icon-btn">🗑️</button></td></tr>
+                                <tr class="u-3"><td><div class="agent-cell"><img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Agent"><span>Ad Optimizer</span></div></td><td><span class="en">Adjusting bid strategies</span><span class="he">התאמת אסטרטגיית הצעות מחיר</span></td><td><span class="badge badge-running"><span class="en">Running</span><span class="he">רץ</span></span></td><td>5h 15m</td><td class="actions-cell"><button class="icon-btn">✏️</button><button class="icon-btn">🗑️</button></td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="bento-card activity-card">
-                    <h3>Recent Activity</h3>
+                <div class="bento-card activity-card rtl-container">
+                    <h3><span class="en">Recent Activity</span><span class="he">פעילות אחרונה</span></h3>
                     <div class="activity-list custom-scrollbar">
-                        <div class="activity-item u-1"><span class="activity-icon info">➕</span><div class="activity-details"><p><strong>Hili Schlesinger</strong> deployed new agent</p><span class="activity-time">Just now</span></div></div>
-                        <div class="activity-item u-2"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Alex Chen</strong> restarted server</p><span class="activity-time">Just now</span></div></div>
-                        <div class="activity-item u-3"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Jordan Lee</strong> generated API keys</p><span class="activity-time">Just now</span></div></div>
-
-                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Code Reviewer</strong> started job</p><span class="activity-time">Just now</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SEO Optimizer</strong> completed report</p><span class="activity-time">2 mins ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>API Monitor</strong> connection failed</p><span class="activity-time">5 mins ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Data Miner</strong> started job</p><span class="activity-time">12 mins ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>DB Optimizer</strong> reindexed tables</p><span class="activity-time">18 mins ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Security Scanner</strong> high latency</p><span class="activity-time">24 mins ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> analyzed data</p><span class="activity-time">30 mins ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Network Analyzer</strong> started job</p><span class="activity-time">1 hour ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SysAdmin Bot</strong> routine check passed</p><span class="activity-time">1 hour ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>Content Gen</strong> API quota exceeded</p><span class="activity-time">2 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> started job</p><span class="activity-time">2 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Data Miner</strong> scraped 500 pages</p><span class="activity-time">3 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>Code Reviewer</strong> found 3 conflicts</p><span class="activity-time">3.5 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>DB Optimizer</strong> cleared cache</p><span class="activity-time">4 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Security Scanner</strong> started deep scan</p><span class="activity-time">4 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Network Analyzer</strong> optimized routes</p><span class="activity-time">5.5 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon danger">❌</span><div class="activity-details"><p><strong>Data Miner</strong> blocked by firewall</p><span class="activity-time">6 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Content Gen</strong> drafted 3 articles</p><span class="activity-time">8 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>API Monitor</strong> started job</p><span class="activity-time">12 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Claude 3 Opus</strong> generated summary</p><span class="activity-time">14 hours ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon warning">⚠️</span><div class="activity-details"><p><strong>DB Optimizer</strong> storage reaching 90%</p><span class="activity-time">1 day ago</span></div></div>
-                        <div class="activity-item"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SysAdmin Bot</strong> backed up database</p><span class="activity-time">1 day ago</span></div></div>
+                        <div class="activity-item u-1"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Code Reviewer</strong> <span class="en">started job</span><span class="he">התחיל משימה</span></p><span class="activity-time"><span class="en">Just now</span><span class="he">ממש עכשיו</span></span></div></div>
+                        <div class="activity-item u-1"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>SEO Optimizer</strong> <span class="en">completed report</span><span class="he">סיים דוח</span></p><span class="activity-time"><span class="en">2 mins ago</span><span class="he">לפני 2 דקות</span></span></div></div>
+                        <div class="activity-item u-2"><span class="activity-icon info">⚡</span><div class="activity-details"><p><strong>Pipeline Bot</strong> <span class="en">started build</span><span class="he">התחיל בנייה</span></p><span class="activity-time"><span class="en">Just now</span><span class="he">ממש עכשיו</span></span></div></div>
+                        <div class="activity-item u-3"><span class="activity-icon success">✓</span><div class="activity-details"><p><strong>Analytics Bot</strong> <span class="en">report sent</span><span class="he">דוח נשלח</span></p><span class="activity-time"><span class="en">Just now</span><span class="he">ממש עכשיו</span></span></div></div>
                     </div>
                 </div>
 
